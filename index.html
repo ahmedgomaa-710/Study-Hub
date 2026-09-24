@@ -1,0 +1,1600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STUDY HUB — Level 2 · Semester 1</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;800&family=Space+Grotesk:wght@500;700&family=IBM+Plex+Sans:wght@400;600&family=IBM+Plex+Mono:wght@400;600&family=JetBrains+Mono:wght@400;600&family=Outfit:wght@400;600&family=Noto+Naskh+Arabic:wght@400;700&family=Cairo:wght@400;700&family=Tajawal:wght@400;500&display=swap" rel="stylesheet">
+<style>
+/* ============ TOKENS ============ */
+:root{
+  --void:#03040a;
+  --s1:#070a14; --s2:#0c1020; --s3:#11162e; --s4:#171d3a;
+  --neon-cyan:#00f0ff; --neon-blue:#4d8aff; --neon-purple:#b347d9;
+  --neon-pink:#ff4d9e; --neon-green:#00ff9d; --neon-red:#f87171; --neon-gold:#ffd93d;
+  --txt:#f0f4ff; --txt2:#8a94b8; --txt3:#4a5578; --txt4:#2a3350;
+  --glass:rgba(17,22,46,.45);
+  --r-sm:12px; --r-md:20px; --r-lg:28px; --r-xl:40px;
+  --acc:#00f0ff; --acc2:#4d8aff; --acc3:#b347d9;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  background:var(--void); color:var(--txt);
+  font-family:'IBM Plex Sans',sans-serif;
+  overflow-x:hidden; min-height:100vh;
+}
+body::before{
+  content:""; position:fixed; inset:0; z-index:0; pointer-events:none;
+  background-image:
+    linear-gradient(rgba(0,240,255,.015) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(0,240,255,.015) 1px,transparent 1px);
+  background-size:56px 56px;
+}
+::selection{background:rgba(0,240,255,.25)}
+::-webkit-scrollbar{width:10px;height:10px}
+::-webkit-scrollbar-track{background:var(--s1)}
+::-webkit-scrollbar-thumb{background:var(--s4);border-radius:8px}
+::-webkit-scrollbar-thumb:hover{background:#232b52}
+
+/* ============ ORBS + PARTICLES ============ */
+.orb{position:fixed;border-radius:50%;filter:blur(110px);z-index:0;pointer-events:none;opacity:.5;animation:orbFloat 20s ease-in-out infinite}
+.orb-1{width:520px;height:520px;background:radial-gradient(circle,rgba(77,138,255,.28),transparent 70%);top:-140px;left:-120px}
+.orb-2{width:460px;height:460px;background:radial-gradient(circle,rgba(179,71,217,.22),transparent 70%);top:30%;right:-160px;animation-delay:-6s}
+.orb-3{width:420px;height:420px;background:radial-gradient(circle,rgba(0,240,255,.18),transparent 70%);bottom:-140px;left:32%;animation-delay:-13s}
+@keyframes orbFloat{0%,100%{transform:translate(0,0) scale(1)}33%{transform:translate(46px,-58px) scale(1.12)}66%{transform:translate(-36px,34px) scale(.94)}}
+#particles{position:fixed;inset:0;z-index:0;pointer-events:none}
+
+/* ============ NAV ============ */
+nav{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  display:flex;align-items:center;justify-content:space-between;
+  padding:18px 42px;transition:background .35s,border-color .35s,backdrop-filter .35s;
+  border-bottom:1px solid transparent;
+}
+nav.scrolled{background:rgba(3,4,10,.72);backdrop-filter:blur(20px) saturate(160%);border-bottom-color:rgba(255,255,255,.07)}
+.logo{display:flex;align-items:center;gap:12px;cursor:pointer}
+.logo-icon{
+  width:40px;height:40px;border-radius:12px;display:grid;place-items:center;
+  background:linear-gradient(135deg,var(--neon-cyan),var(--neon-blue) 60%,var(--neon-purple));
+  font-size:19px;animation:iconPulse 3s ease-in-out infinite;
+}
+@keyframes iconPulse{0%,100%{box-shadow:0 0 12px rgba(0,240,255,.45)}50%{box-shadow:0 0 30px rgba(0,240,255,.9)}}
+.logo b{font-family:'Space Grotesk';font-size:1.05rem;letter-spacing:.14em}
+.logo b span{color:var(--neon-cyan)}
+.nav-tag{font-family:'IBM Plex Mono';font-size:.62rem;letter-spacing:.22em;color:var(--txt3);border:1px solid var(--txt4);padding:7px 14px;border-radius:99px}
+
+/* ============ VIEWS ============ */
+.view{display:none;position:relative;z-index:2}
+.view.active{display:block}
+
+/* ============ HERO ============ */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:120px 24px 80px;position:relative}
+.eyebrow{
+  font-family:'IBM Plex Mono';font-size:.66rem;letter-spacing:.32em;color:var(--neon-cyan);
+  padding:9px 20px;border:1px solid rgba(0,240,255,.3);border-radius:99px;margin-bottom:34px;
+  background:linear-gradient(100deg,transparent 30%,rgba(0,240,255,.14) 50%,transparent 70%);
+  background-size:220% 100%;animation:shimmer 3s linear infinite;
+}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+.hero h1{
+  font-family:'Playfair Display',serif;font-weight:800;
+  font-size:clamp(3.2rem,9vw,6.8rem);line-height:1.04;
+  background:linear-gradient(115deg,#fff 15%,var(--neon-cyan) 42%,var(--neon-blue) 66%,var(--neon-purple));
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  animation:fadeSlideUp .9s ease both;
+}
+.hero .ar-sub{
+  font-family:'Noto Naskh Arabic';direction:rtl;font-size:clamp(1.05rem,2.4vw,1.5rem);
+  color:var(--txt2);margin-top:22px;animation:fadeSlideUp .9s .18s ease both;
+}
+.badges{display:flex;gap:14px;margin-top:34px;animation:fadeSlideUp .9s .32s ease both}
+.badge-pill{
+  font-family:'IBM Plex Mono';font-size:.68rem;letter-spacing:.24em;padding:11px 22px;border-radius:99px;
+}
+.badge-pill.purple{color:var(--neon-purple);border:1px solid rgba(179,71,217,.4);background:rgba(179,71,217,.08)}
+.badge-pill.cyan{color:var(--neon-cyan);border:1px solid rgba(0,240,255,.35);background:rgba(0,240,255,.06)}
+@keyframes fadeSlideUp{from{opacity:0;transform:translateY(40px)}to{opacity:1;transform:translateY(0)}}
+.scroll-ind{position:absolute;bottom:34px;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:10px;color:var(--txt3);font-family:'IBM Plex Mono';font-size:.58rem;letter-spacing:.3em;animation:fadeSlideUp 1s .6s ease both}
+.scroll-ind .line{width:1px;height:52px;background:linear-gradient(var(--neon-cyan),transparent);animation:scrollPulse 2s ease-in-out infinite}
+@keyframes scrollPulse{0%,100%{opacity:.35;transform:scaleY(1)}50%{opacity:1;transform:scaleY(1.25)}}
+
+/* ============ SECTION HEADERS ============ */
+.section{max-width:1280px;margin:0 auto;padding:60px 34px}
+.sec-head{margin-bottom:44px}
+.sec-head .kicker{font-family:'IBM Plex Mono';font-size:.64rem;letter-spacing:.3em;color:var(--neon-cyan);margin-bottom:12px}
+.sec-head h2{font-family:'Space Grotesk';font-size:clamp(1.6rem,3.4vw,2.4rem);font-weight:700}
+.sec-head p{color:var(--txt2);margin-top:8px;font-size:.95rem}
+
+/* ============ SUBJECT CARDS ============ */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(340px,1fr));gap:26px}
+.card{
+  background:var(--glass);backdrop-filter:blur(24px) saturate(180%);
+  border:1px solid rgba(255,255,255,.08);border-radius:var(--r-lg);
+  padding:30px;cursor:pointer;position:relative;overflow:hidden;
+  transition:transform .35s cubic-bezier(.2,.8,.2,1),border-color .35s,box-shadow .35s;
+}
+.card:hover{transform:translateY(-8px) scale(1.01);border-color:rgba(0,240,255,.25);box-shadow:0 22px 60px -18px rgba(0,240,255,.22)}
+.card.disabled{opacity:.55;cursor:not-allowed}
+.card.disabled:hover{transform:none;border-color:rgba(255,255,255,.08);box-shadow:none}
+.card-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:22px}
+.dot-tag{display:flex;align-items:center;gap:9px;font-family:'IBM Plex Mono';font-size:.66rem;letter-spacing:.2em;color:var(--txt2)}
+.dot-tag .dot{width:9px;height:9px;border-radius:50%;animation:dotPulse 2s ease-in-out infinite}
+@keyframes dotPulse{0%,100%{opacity:1;box-shadow:0 0 8px currentColor}50%{opacity:.35;box-shadow:none}}
+.status{font-family:'IBM Plex Mono';font-size:.58rem;letter-spacing:.2em;padding:5px 12px;border-radius:99px}
+.status.live{color:var(--neon-green);border:1px solid rgba(0,255,157,.35);background:rgba(0,255,157,.07)}
+.status.soon{color:var(--txt3);border:1px solid var(--txt4)}
+.card-body{display:flex;gap:18px;align-items:flex-start;margin-bottom:24px}
+.icon-box{width:64px;height:64px;min-width:64px;border-radius:18px;display:grid;place-items:center;font-size:1.7rem}
+.card h3{font-family:'Space Grotesk';font-size:1.28rem;font-weight:700}
+.card .ar-name{font-family:'Noto Naskh Arabic';direction:rtl;display:block;text-align:left;color:var(--txt2);font-size:.95rem;margin-top:5px}
+.card .desc{color:var(--txt2);font-size:.86rem;margin-top:12px;line-height:1.65}
+.stats{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:24px}
+.stat{background:rgba(3,4,10,.5);border:1px solid rgba(255,255,255,.05);border-radius:var(--r-sm);padding:12px 8px;text-align:center}
+.stat b{font-family:'Space Grotesk';font-size:1.25rem;display:block}
+.stat span{font-family:'IBM Plex Mono';font-size:.55rem;letter-spacing:.16em;color:var(--txt3);text-transform:uppercase}
+.cta{
+  width:100%;padding:14px;border-radius:14px;border:1px solid rgba(255,255,255,.12);
+  background:transparent;color:var(--txt);font-family:'Space Grotesk';font-weight:700;
+  font-size:.86rem;letter-spacing:.1em;cursor:pointer;position:relative;overflow:hidden;
+  transition:color .3s,border-color .3s;z-index:1;
+}
+.cta::before{content:"";position:absolute;inset:0;z-index:-1;opacity:0;transition:opacity .35s;background:var(--cta-grad,linear-gradient(120deg,var(--acc),var(--acc2)))}
+.card:hover .cta::before,.cta:hover::before{opacity:1}
+.card:hover .cta,.cta:hover{border-color:transparent;color:#03040a}
+.cta:disabled{opacity:.5;cursor:not-allowed}
+.cta:disabled::before{display:none}
+.cta:disabled:hover{color:var(--txt)}
+
+/* ============ SUBJECT VIEW ============ */
+.topbar{
+  position:sticky;top:0;z-index:90;display:flex;align-items:center;gap:18px;
+  padding:16px 30px;background:rgba(3,4,10,.8);backdrop-filter:blur(20px) saturate(160%);
+  border-bottom:1px solid rgba(255,255,255,.07);
+}
+.back-btn{
+  display:flex;align-items:center;gap:9px;padding:10px 18px;border-radius:12px;cursor:pointer;
+  border:1px solid rgba(255,255,255,.12);background:rgba(17,22,46,.5);color:var(--txt);
+  font-family:'IBM Plex Mono';font-size:.68rem;letter-spacing:.18em;transition:border-color .3s,color .3s;
+}
+.back-btn:hover{border-color:var(--acc);color:var(--acc)}
+.topbar h2{font-family:'Space Grotesk';font-size:1.15rem;font-weight:700}
+.crumb{margin-left:auto;font-family:'IBM Plex Mono';font-size:.6rem;letter-spacing:.2em;color:var(--txt3);border:1px solid var(--txt4);padding:6px 14px;border-radius:99px}
+.subject-wrap{display:flex;max-width:1440px;margin:0 auto;min-height:calc(100vh - 68px)}
+
+/* Sidebar */
+.sidebar{
+  width:240px;min-width:240px;position:sticky;top:68px;height:calc(100vh - 68px);
+  overflow-y:auto;padding:28px 16px;border-right:1px solid rgba(255,255,255,.06);background:rgba(7,10,20,.6);
+}
+.sidebar .sb-label{font-family:'IBM Plex Mono';font-size:.58rem;letter-spacing:.26em;color:var(--txt3);padding:0 12px 14px}
+.ch-item{
+  display:flex;align-items:center;gap:11px;padding:12px 14px;border-radius:12px;cursor:pointer;
+  color:var(--txt2);font-size:.86rem;font-weight:500;margin-bottom:4px;border:1px solid transparent;
+  transition:all .25s;font-family:'Outfit';
+}
+.ch-item .ch-num{font-family:'IBM Plex Mono';font-size:.62rem;width:26px;height:26px;min-width:26px;border-radius:8px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.1);color:var(--ch,var(--txt3))}
+.ch-item:hover{background:rgba(255,255,255,.04);color:var(--txt)}
+.ch-item.active{background:rgba(255,255,255,.06);color:var(--txt);border-color:var(--acc)}
+.ch-item.active .ch-num{border-color:var(--acc);color:var(--acc);box-shadow:0 0 12px rgba(0,240,255,.25)}
+
+/* Content */
+.content{flex:1;padding:44px 48px 100px;max-width:980px}
+.chapter{display:none;animation:fadeSlideUp .45s ease both}
+.chapter.active{display:block}
+.chapter h2{font-family:'Space Grotesk';font-size:clamp(1.5rem,3vw,2.1rem);margin-bottom:6px}
+.chapter .ch-kicker{font-family:'IBM Plex Mono';font-size:.62rem;letter-spacing:.26em;color:var(--acc);margin-bottom:14px}
+.chapter .ch-desc{color:var(--txt2);font-size:.92rem;margin-bottom:30px;line-height:1.7}
+h4.blk-title{font-family:'Space Grotesk';font-size:1.05rem;margin:30px 0 14px;display:flex;align-items:center;gap:10px}
+h4.blk-title::before{content:"";width:22px;height:2px;background:var(--acc)}
+
+/* Content blocks */
+.block-en{
+  background:rgba(0,240,255,.05);border:1px solid rgba(0,240,255,.1);border-radius:10px;
+  padding:16px 18px;color:#b3e5fc;direction:ltr;font-size:.92rem;line-height:1.75;margin-bottom:12px;
+}
+.block-en b,.block-en strong{color:var(--txt)}
+.block-ar{
+  background:rgba(255,217,61,.06);border-right:3px solid var(--neon-gold);
+  border-radius:0 10px 10px 0;padding:16px 18px;color:#fff9c4;direction:rtl;
+  font-family:'Tajawal';font-size:.94rem;line-height:1.9;margin-bottom:12px;
+}
+.code-block{
+  background:rgba(0,0,0,.4);border:1px solid rgba(0,240,255,.15);border-radius:8px;
+  font-family:'JetBrains Mono',monospace;color:#80cbc4;direction:ltr;
+  padding:16px 18px;font-size:.84rem;overflow-x:auto;margin:12px 0;line-height:1.7;
+}
+.example-box{background:rgba(0,255,157,.05);border:1px solid rgba(0,255,157,.18);border-radius:10px;padding:16px 18px;margin:14px 0}
+.example-box .ex-label{font-family:'IBM Plex Mono';font-size:.6rem;letter-spacing:.24em;color:var(--neon-green);display:block;margin-bottom:10px}
+.example-box .ex-en{color:#ccf5e5;direction:ltr;font-size:.9rem;line-height:1.7}
+.example-box .ex-ar{color:#a5d6a7;direction:rtl;font-family:'Tajawal';font-size:.92rem;line-height:1.9;margin-top:8px}
+.bilingual-row{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0}
+.bilingual-row .cell{background:var(--s3);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:16px 18px;font-size:.9rem;line-height:1.75}
+.bilingual-row .cell.en{color:#b3e5fc;direction:ltr}
+.bilingual-row .cell.ar{color:#fff9c4;direction:rtl;font-family:'Tajawal';border-right:3px solid var(--neon-gold)}
+.bilingual-row .cell h5{font-family:'Space Grotesk';font-size:.86rem;margin-bottom:8px;color:var(--txt)}
+.bilingual-row .cell.ar h5{font-family:'Noto Naskh Arabic'}
+table.data{width:100%;border-collapse:collapse;direction:ltr;margin:16px 0;font-size:.86rem}
+table.data th{color:var(--acc);font-family:'IBM Plex Mono';font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;text-align:left;padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.12)}
+table.data td{padding:12px 14px;border-bottom:1px solid rgba(255,255,255,.05);color:var(--txt2)}
+table.data td:first-child{color:var(--txt);font-weight:600}
+table.data tr:hover td{background:rgba(0,240,255,.035)}
+.recap{
+  border:1px solid transparent;border-radius:16px;padding:30px;margin:36px 0 12px;
+  background:linear-gradient(var(--s2),var(--s2)) padding-box,
+             linear-gradient(120deg,var(--neon-green),var(--neon-cyan)) border-box;
+}
+.recap h3{font-family:'Space Grotesk';margin-bottom:18px;display:flex;align-items:center;gap:10px}
+.recap ul{list-style:none}
+.recap li{padding:9px 0 9px 30px;position:relative;color:var(--txt2);font-size:.92rem;line-height:1.7;border-bottom:1px dashed rgba(255,255,255,.06)}
+.recap li:last-child{border-bottom:none}
+.recap li::before{content:"◆";position:absolute;left:2px;color:var(--neon-cyan);font-size:.7rem;top:13px}
+.recap li b{color:var(--txt)}
+.collapsible{margin:14px 0}
+.collapsible>button{
+  width:100%;display:flex;justify-content:space-between;align-items:center;cursor:pointer;
+  background:var(--s3);border:1px solid rgba(255,255,255,.08);border-radius:12px;
+  padding:15px 18px;color:var(--txt);font-family:'Outfit';font-size:.9rem;font-weight:600;
+  transition:border-color .3s;
+}
+.collapsible>button:hover{border-color:var(--acc)}
+.collapsible>button .arrow{transition:transform .3s;color:var(--acc);font-family:'IBM Plex Mono'}
+.collapsible.open>button .arrow{transform:rotate(180deg)}
+.collapsible .coll-body{display:none;padding:16px 4px 4px;animation:fadeSlideUp .3s ease both}
+.collapsible.open .coll-body{display:block}
+.fig{display:flex;justify-content:center;margin:20px 0;background:rgba(3,4,10,.45);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:22px}
+.fig figcaption{text-align:center;font-family:'IBM Plex Mono';font-size:.62rem;letter-spacing:.2em;color:var(--txt3);margin-top:12px;width:100%}
+.fig svg{max-width:100%}
+.mini-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin:14px 0}
+.mini-card{background:var(--s3);border:1px solid rgba(255,255,255,.07);border-radius:12px;padding:16px;border-top:2px solid var(--acc)}
+.mini-card h5{font-family:'Space Grotesk';font-size:.9rem;margin-bottom:8px}
+.mini-card p{font-size:.82rem;color:var(--txt2);line-height:1.65}
+.mini-card .tag{font-family:'IBM Plex Mono';font-size:.56rem;letter-spacing:.16em;color:var(--acc);display:block;margin-bottom:8px}
+
+/* ============ QUIZ ============ */
+.quiz-shell{background:var(--glass);border:1px solid rgba(255,255,255,.08);border-radius:var(--r-lg);padding:34px;backdrop-filter:blur(24px)}
+.quiz-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.quiz-top .q-count{font-family:'IBM Plex Mono';font-size:.66rem;letter-spacing:.2em;color:var(--txt2)}
+.quiz-top .q-score{font-family:'IBM Plex Mono';font-size:.66rem;letter-spacing:.2em;color:var(--neon-gold)}
+.q-progress{height:6px;background:var(--s4);border-radius:99px;overflow:hidden;margin-bottom:30px}
+.q-progress i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--neon-blue),var(--neon-cyan));border-radius:99px;transition:width .5s cubic-bezier(.2,.8,.2,1)}
+.q-card{border:1px solid rgba(255,255,255,.08);border-radius:var(--r-md);padding:28px;margin-bottom:22px;transition:border-color .3s,box-shadow .3s}
+.q-card.flash-correct{border-color:rgba(0,255,157,.5);box-shadow:0 0 30px -8px rgba(0,255,157,.35)}
+.q-card.flash-wrong{border-color:rgba(248,113,113,.5);box-shadow:0 0 30px -8px rgba(248,113,113,.35)}
+.q-num{font-family:'IBM Plex Mono';font-size:.62rem;letter-spacing:.24em;color:var(--neon-cyan);margin-bottom:12px}
+.q-text{font-family:'Outfit';font-size:1.06rem;font-weight:600;direction:ltr;margin-bottom:20px;line-height:1.55}
+.q-opts{display:grid;gap:10px}
+.opt{
+  display:flex;align-items:center;gap:14px;text-align:left;cursor:pointer;
+  background:rgba(3,4,10,.5);border:1px solid rgba(255,255,255,.1);border-radius:12px;
+  padding:14px 16px;color:var(--txt);font-family:'Outfit';font-size:.92rem;transition:all .25s;
+}
+.opt .letter{font-family:'IBM Plex Mono';font-size:.66rem;width:28px;height:28px;min-width:28px;border-radius:8px;display:grid;place-items:center;border:1px solid rgba(255,255,255,.15);color:var(--txt2)}
+.opt:hover:not(:disabled){border-color:var(--neon-cyan);transform:translateX(4px)}
+.opt:disabled{cursor:default}
+.opt.correct{border-color:var(--neon-green);background:rgba(0,255,157,.09)}
+.opt.correct .letter{border-color:var(--neon-green);color:var(--neon-green)}
+.opt.wrong{border-color:var(--neon-red);background:rgba(248,113,113,.09)}
+.opt.wrong .letter{border-color:var(--neon-red);color:var(--neon-red)}
+.q-explain{
+  display:none;direction:rtl;text-align:right;background:rgba(77,138,255,.08);
+  border:1px solid rgba(77,138,255,.2);border-radius:12px;padding:16px 18px;margin-top:16px;
+  font-family:'Cairo';color:#cfe4ff;font-size:.92rem;line-height:1.9;
+}
+.q-explain.show{display:block;animation:fadeSlideUp .35s ease both}
+.q-explain b{color:var(--neon-gold)}
+.quiz-result{display:none;text-align:center;padding:40px 20px}
+.quiz-result.show{display:block;animation:fadeSlideUp .5s ease both}
+.quiz-result .big{font-family:'Playfair Display';font-size:4rem;font-weight:800;background:linear-gradient(120deg,var(--neon-cyan),var(--neon-purple));-webkit-background-clip:text;background-clip:text;color:transparent}
+.quiz-result p{color:var(--txt2);margin:10px 0 26px;font-family:'Tajawal';direction:rtl}
+
+/* Lecture page blocks */
+.page-header{margin-bottom:34px;padding-bottom:22px;border-bottom:1px solid rgba(255,255,255,.07)}
+.page-lec-num{display:block;font-family:'IBM Plex Mono';font-size:.62rem;letter-spacing:.26em;color:var(--acc);margin-bottom:12px}
+.page-title-wrap h2{font-family:'Space Grotesk';font-size:clamp(1.5rem,3vw,2.1rem);line-height:1.25}
+.page-title-wrap h2 span{display:block;direction:rtl;text-align:left;font-family:'Noto Naskh Arabic';font-weight:500;font-size:.62em;color:var(--txt2);margin-top:8px}
+.content-block{margin-bottom:38px}
+.block-title-bar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px;padding:12px 16px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.07);border-left:3px solid var(--acc);border-radius:10px}
+.btitle-en{font-family:'Space Grotesk';font-weight:700;font-size:1.02rem}
+.btitle-sep{color:var(--txt4)}
+.btitle-ar{font-family:'Noto Naskh Arabic';direction:rtl;color:var(--txt2);font-size:1rem}
+.bilingual-grid,.highlight-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.highlight-row{margin-top:12px}
+.col-en,.col-ar{background:var(--s3);border:1px solid rgba(255,255,255,.07);border-radius:10px;padding:16px 18px;font-size:.9rem;line-height:1.75}
+.col-en{color:#b3e5fc;direction:ltr;font-family:'IBM Plex Sans'}
+.col-ar{color:#fff9c4;direction:rtl;font-family:'Tajawal';font-size:.94rem;line-height:1.9;border-right:3px solid var(--neon-gold)}
+.col-label{font-family:'IBM Plex Mono';font-size:.58rem;letter-spacing:.24em;color:var(--txt3);margin-bottom:10px}
+.col-ar .col-label{font-family:'Noto Naskh Arabic';letter-spacing:0;font-size:.74rem}
+.col-en p,.col-ar p{margin-bottom:10px}
+.col-en ul,.col-ar ul{margin:8px 0 4px;padding-left:20px}
+.col-ar ul{padding-left:0;padding-right:20px}
+.col-en li,.col-ar li{margin-bottom:8px}
+.col-en strong,.col-ar strong{color:var(--txt)}
+.hl-en,.hl-ar{background:rgba(0,255,157,.05);border:1px solid rgba(0,255,157,.18);border-radius:10px;padding:14px 16px;font-size:.88rem;line-height:1.7}
+.hl-en{color:#ccf5e5;direction:ltr}
+.hl-ar{color:#a5d6a7;direction:rtl;font-family:'Tajawal';font-size:.92rem;line-height:1.9}
+.summary-block{border:1px solid transparent;border-radius:16px;padding:30px;margin:36px 0 12px;direction:rtl;
+  background:linear-gradient(var(--s2),var(--s2)) padding-box,linear-gradient(120deg,var(--neon-green),var(--neon-cyan)) border-box}
+.summary-block h3{font-family:'Tajawal';font-size:1.15rem;margin-bottom:18px}
+.summary-content p{font-family:'Tajawal';color:var(--txt2);font-size:.94rem;line-height:1.9;padding:9px 0;border-bottom:1px dashed rgba(255,255,255,.06)}
+.summary-content p:last-child{border-bottom:none}
+.quiz-section{background:var(--glass);border:1px solid rgba(255,255,255,.08);border-radius:var(--r-lg);padding:30px;margin-top:36px;backdrop-filter:blur(24px)}
+.quiz-title{font-family:'Space Grotesk';font-size:1.15rem;font-weight:700;margin-bottom:8px}
+.quiz-subtitle{font-family:'Tajawal';direction:rtl;color:var(--txt2);font-size:.9rem}
+
+/* Empty state for subjects pending content merge */
+.empty-mod{
+  border:1px dashed rgba(255,255,255,.14);border-radius:var(--r-md);padding:60px 30px;text-align:center;color:var(--txt2);
+}
+.empty-mod .em-icon{font-size:2.4rem;margin-bottom:16px}
+.empty-mod h4{font-family:'Space Grotesk';color:var(--txt);margin-bottom:10px}
+.empty-mod p{font-size:.88rem;max-width:460px;margin:0 auto;line-height:1.7}
+
+footer{position:relative;z-index:2;text-align:center;padding:44px 20px;color:var(--txt3);font-family:'IBM Plex Mono';font-size:.62rem;letter-spacing:.24em;border-top:1px solid rgba(255,255,255,.05)}
+
+/* ============ RESPONSIVE ============ */
+@media(max-width:960px){
+  .subject-wrap{flex-direction:column}
+  .sidebar{width:100%;min-width:0;height:auto;position:sticky;top:64px;display:flex;overflow-x:auto;overflow-y:hidden;padding:12px 14px;gap:6px;border-right:none;border-bottom:1px solid rgba(255,255,255,.07);z-index:80;background:rgba(3,4,10,.92);backdrop-filter:blur(16px)}
+  .sidebar .sb-label{display:none}
+  .ch-item{white-space:nowrap;margin-bottom:0}
+  .content{padding:30px 20px 80px}
+  .bilingual-row,.bilingual-grid,.highlight-row{grid-template-columns:1fr}
+  nav{padding:14px 18px}
+  .nav-tag{display:none}
+  .crumb{display:none}
+}
+@media(max-width:768px){
+  .hero{padding:90px 18px 60px}
+  .hero h1{font-size:clamp(2.4rem,11vw,3.8rem)}
+  .badges{flex-direction:column;align-items:center;gap:10px}
+  .badge-pill{padding:9px 18px;font-size:.62rem}
+  .section{padding:40px 18px}
+  .grid{grid-template-columns:1fr;gap:18px}
+  .card{padding:22px}
+  .stats{grid-template-columns:1fr 1fr 1fr}
+  .stat b{font-size:1.05rem}
+  .bilingual-grid{grid-template-columns:1fr}
+  .col-en{border-right:none;border-bottom:1px solid rgba(255,255,255,.07)}
+  .highlight-row{grid-template-columns:1fr}
+  .hl-en{border-right:none;border-bottom:1px solid rgba(255,255,255,.07)}
+  .content{padding:22px 16px 70px}
+  .topbar{padding:12px 16px;gap:10px}
+  .topbar h2{font-size:.92rem}
+  .block-title-bar{flex-wrap:wrap;gap:6px}
+  .example-box{padding:14px}
+  .mini-cards{grid-template-columns:1fr}
+  .bilingual-row{grid-template-columns:1fr}
+  .quiz-shell{padding:22px 16px}
+  .opt{padding:11px 12px;font-size:.86rem}
+  .recap{padding:22px 18px}
+  .summary-block{padding:22px 18px}
+  footer{padding:30px 16px}
+}
+</style>
+<base target="_blank">
+</head>
+<body>
+
+<div class="orb orb-1"></div><div class="orb orb-2"></div><div class="orb orb-3"></div>
+<canvas id="particles"></canvas>
+
+<nav id="nav">
+  <div class="logo" onclick="goHome()">
+    <div class="logo-icon">◈</div>
+    <b>STUDY<span>HUB</span></b>
+  </div>
+  <div class="nav-tag">LEVEL 02 · SEMESTER 01</div>
+</nav>
+
+<!-- ================= HOME ================= -->
+<div class="view active" id="view-home">
+  <header class="hero">
+    <div class="eyebrow">AI · COMPUTER SCIENCE · UNIVERSITY</div>
+    <h1>Study Hub</h1>
+    <div class="badges">
+      <span class="badge-pill purple">LEVEL 02</span>
+      <span class="badge-pill cyan">SEMESTER 01</span>
+    </div>
+    <div class="scroll-ind"><span>SCROLL</span><div class="line"></div></div>
+  </header>
+
+  <section class="section">
+    <div class="grid" id="subject-grid"></div>
+  </section>
+
+  <footer>STUDY HUB · LEVEL 02 — SEMESTER 01 · BUILT FOR FOCUS</footer>
+</div>
+
+<!-- ================= SUBJECT ================= -->
+<div class="view" id="view-subject">
+  <div class="topbar">
+    <button class="back-btn" onclick="goHome()">← BACK</button>
+    <h2 id="tb-title"></h2>
+    <span class="crumb" id="tb-crumb"></span>
+  </div>
+  <div class="subject-wrap">
+    <aside class="sidebar" id="sidebar"></aside>
+    <main class="content" id="content"></main>
+  </div>
+</div>
+
+<script>
+/* ================================================================
+   DATA
+================================================================ */
+const LEC01_HTML = `
+<div class="lec-page" id="lec01">
+  <div class="page-header">
+    <span class="page-lec-num">LECTURE 01</span>
+    <div class="page-title-wrap"><h2>Introduction to Communication Networks<span>مقدمة في شبكات الاتصالات</span></h2></div>
+  </div>
+
+  <div class="content-block">
+    <div class="block-title-bar"><span class="btitle-en">1 · Data Communications</span><span class="btitle-sep">|</span><span class="btitle-ar">الاتصال بالبيانات</span></div>
+    <div class="bilingual-grid">
+      <div class="col-en"><div class="col-label">ENGLISH</div>
+        <p>Telecommunication means communication at a distance. Data communications is the exchange of data between two devices via a transmission medium (like a wire cable).</p>
+        <p>A data communications system has 5 components:</p>
+        <ul>
+          <li><strong>Message</strong> — the information itself (text, numbers, pictures, audio, video)</li>
+          <li><strong>Sender</strong> — the device that sends the message (computer, workstation, camera)</li>
+          <li><strong>Receiver</strong> — the device that receives it (computer, telephone handset)</li>
+          <li><strong>Transmission medium</strong> — the physical path (twisted pair, coaxial cable, satellite)</li>
+          <li><strong>Protocol</strong> — the set of rules that governs the communication</li>
+        </ul>
+      </div>
+      <div class="col-ar"><div class="col-label">العربية</div>
+        <p>الاتصال عن بعد (Telecommunication) معناه إنك تبعت وتستقبل معلومات وانت بعيد عن الطرف التاني. الاتصال بالبيانات (Data Communications) هو تبادل بيانات بين جهازين عن طريق وسيط نقل زي كابل سلك.</p>
+        <p>أي نظام اتصال بيانات مكوّن من 5 عناصر:</p>
+        <ul>
+          <li><strong>الرسالة (Message)</strong> — المعلومة نفسها، ممكن تكون نص، أرقام، صور، صوت، فيديو</li>
+          <li><strong>المُرسِل (Sender)</strong> — الجهاز اللي بيبعت الرسالة، زي كمبيوتر أو كاميرا</li>
+          <li><strong>المُستقبِل (Receiver)</strong> — الجهاز اللي بيستقبل، زي كمبيوتر أو تليفون</li>
+          <li><strong>وسيط النقل (Transmission medium)</strong> — المسار الفيزيائي اللي البيانات بتعدي عليه، زي كابل نحاس أو قمر صناعي</li>
+          <li><strong>البروتوكول (Protocol)</strong> — مجموعة القواعد اللي بتحكم عملية الاتصال، وبتكون موجودة عند المُرسِل والمُستقبِل الاتنين بنفس الشكل</li>
+        </ul>
+      </div>
+    </div>
+    <div class="highlight-row">
+      <div class="hl-en">Without a shared protocol, sender and receiver can't understand each other — even with a perfect medium.</div>
+      <div class="hl-ar">من غير بروتوكول متفق عليه، المُرسِل والمُستقبِل مش هيفهموا بعض حتى لو الوسيط نفسه ممتاز.</div>
+    </div>
+    <div class="example-box">
+      <span class="ex-label">EXAMPLE — مثال</span>
+      <div class="ex-en">You send a WhatsApp voice message to a friend: <strong>Message</strong> = the audio, <strong>Sender</strong> = your phone, <strong>Receiver</strong> = friend's phone, <strong>Medium</strong> = internet (Wi-Fi/4G), <strong>Protocol</strong> = WhatsApp's proprietary protocol that both apps understand.</div>
+      <div class="ex-ar">لما بتبعت رسالة صوتية على واتساب: <strong>الرسالة</strong> = الصوت اللي اتسجل، <strong>المُرسِل</strong> = تليفونك، <strong>المُستقبِل</strong> = تليفون صاحبك، <strong>الوسيط</strong> = الإنترنت (Wi-Fi أو 4G)، <strong>البروتوكول</strong> = بروتوكول واتساب اللي التطبيقين الاتنين بيفهموه بنفس الطريقة.</div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <div class="block-title-bar"><span class="btitle-en">2 · Data Flow Modes</span><span class="btitle-sep">|</span><span class="btitle-ar">أنماط تدفق البيانات</span></div>
+    <div class="bilingual-grid">
+      <div class="col-en"><div class="col-label">ENGLISH</div>
+        <p><strong>Simplex</strong> — communication is one-directional only. Example: keyboard → monitor.</p>
+        <p><strong>Half-duplex</strong> — each station can send and receive, but not at the same time. Example: walkie-talkies.</p>
+        <p><strong>Full-duplex</strong> — both stations transmit and receive simultaneously. Example: telephone network.</p>
+      </div>
+      <div class="col-ar"><div class="col-label">العربية</div>
+        <p><strong>Simplex</strong> — الاتصال في اتجاه واحد بس، البيانات بتمشي من جهة لجهة ومش بترجع تاني. زي الكيبورد اللي بيبعت للشاشة، والشاشة معندهاش رد.</p>
+        <p><strong>Half-duplex</strong> — كل محطة تقدر تبعت وتستقبل، بس مش في نفس اللحظة — لازم توقف عشان الطرف التاني يتكلم. زي جهاز اللاسلكي (walkie-talkie) لما تضغط للكلام.</p>
+        <p><strong>Full-duplex</strong> — الاتنين بيبعتوا ويستقبلوا في نفس الوقت من غير ما يستنوا بعض. زي المكالمة التليفونية العادية اللي انت والشخص التاني بتتكلموا سوا.</p>
+      </div>
+    </div>
+    <div class="highlight-row">
+      <div class="hl-en">Think of half-duplex as a one-lane road with traffic lights, and full-duplex as a two-lane highway.</div>
+      <div class="hl-ar">تخيل half-duplex زي طريق حارة واحدة فيها إشارة تتحكم مين يعدي، وfull-duplex زي طريق بحارتين كل واحدة ليها اتجاهها.</div>
+    </div>
+    <div class="example-box">
+      <span class="ex-label">EXAMPLE — مثال</span>
+      <div class="ex-en"><strong>Simplex:</strong> TV broadcast — signal goes from station to your TV, your TV never sends back. <strong>Half-duplex:</strong> Police radio — one officer talks while the other listens, then they swap. <strong>Full-duplex:</strong> Normal phone call — both people speak and hear at the same time.</div>
+      <div class="ex-ar"><strong>Simplex:</strong> بث التلفزيون — الإشارة بتيجي من المحطة لشاشتك، وشاشتك مش بتبعت حاجة. <strong>Half-duplex:</strong> راديو الشرطة — ضابط بيتكلم والتاني بيسمع، وبعدين بيتبادلوا. <strong>Full-duplex:</strong> مكالمة تليفون عادية — الاتنين بيتكلموا ويسمعوا في نفس الوقت.</div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <div class="block-title-bar"><span class="btitle-en">3 · Networks & Connection Types</span><span class="btitle-sep">|</span><span class="btitle-ar">الشبكات وأنواع الاتصال</span></div>
+    <div class="bilingual-grid">
+      <div class="col-en"><div class="col-label">ENGLISH</div>
+        <p>A <strong>network</strong> is a set of devices (nodes) connected by communication links. A node can be a computer, printer, or any device that can send/receive data.</p>
+        <p>Two connection types:</p>
+        <ul>
+          <li><strong>Point-to-point</strong> — a dedicated link between exactly two devices; the entire capacity is reserved for them.</li>
+          <li><strong>Multipoint (multidrop)</strong> — more than two devices share a single link, either spatially or by time-sharing.</li>
+        </ul>
+        <p>Networks are also categorized by geographic coverage: <strong>LAN</strong> (single building/campus), <strong>MAN</strong> (a city), <strong>WAN</strong> (country/continent).</p>
+      </div>
+      <div class="col-ar"><div class="col-label">العربية</div>
+        <p><strong>الشبكة (Network)</strong> هي مجموعة أجهزة (اسمها nodes) متوصلة ببعض عن طريق روابط اتصال. الـ node ممكن يكون كمبيوتر أو طابعة أو أي جهاز يقدر يبعت أو يستقبل بيانات.</p>
+        <p>نوعين اتصال:</p>
+        <ul>
+          <li><strong>Point-to-point</strong> — رابط مخصص بين جهازين بس، وكل سعة الرابط محجوزة ليهم الاتنين وحدهم.</li>
+          <li><strong>Multipoint</strong> — أكتر من جهازين بيشاركوا نفس الرابط، إما بالمكان أو بالتوقيت (كل جهاز ياخد نص).</li>
+        </ul>
+        <p>الشبكات كمان بتتصنف حسب المساحة اللي بتغطيها: <strong>LAN</strong> (مبنى أو كامبس واحد)، <strong>MAN</strong> (مدينة كاملة)، <strong>WAN</strong> (دولة أو قارة، زي شبكة الإنترنت العالمية).</p>
+      </div>
+    </div>
+    <div class="highlight-row">
+      <div class="hl-en">LAN → MAN → WAN is essentially a scale of "how far the network reaches", not a different technology.</div>
+      <div class="hl-ar">LAN و MAN و WAN هي نفس فكرة الشبكة، بس بتختلف في "المدى" اللي الشبكة بتوصله، مش نوع تكنولوجيا مختلفة تمامًا.</div>
+    </div>
+    <div class="example-box">
+      <span class="ex-label">EXAMPLE — مثال</span>
+      <div class="ex-en"><strong>Point-to-point:</strong> A direct cable between your laptop and a printer — only those two share that link. <strong>Multipoint:</strong> A classroom Wi-Fi router that 30 students connect to simultaneously — all sharing the same medium. <strong>LAN:</strong> Delta University campus network. <strong>MAN:</strong> Mansoura city fiber network. <strong>WAN:</strong> The internet connecting Egypt to the US.</div>
+      <div class="ex-ar"><strong>Point-to-point:</strong> كابل مباشر بين لابتوبك والطابعة — الاتنين دول بس بيشاركوا الرابط ده. <strong>Multipoint:</strong> راوتر Wi-Fi في فصل درس 30 طالب كلهم متوصلين بنفس الوسيط. <strong>LAN:</strong> شبكة كامبس جامعة الدلتا. <strong>MAN:</strong> شبكة الألياف الضوئية في مدينة المنصورة. <strong>WAN:</strong> الإنترنت اللي بيوصل مصر بأمريكا.</div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <div class="block-title-bar"><span class="btitle-en">4 · HUB vs SWITCH vs ROUTER</span><span class="btitle-sep">|</span><span class="btitle-ar">الهب والسويتش والراوتر</span></div>
+    <div class="bilingual-grid">
+      <div class="col-en"><div class="col-label">ENGLISH</div>
+        <p><strong>HUB</strong> (Layer 1 - Physical): broadcasts incoming data to all ports blindly, no filtering, half-duplex only, one collision domain for everyone. Cheap but obsolete today.</p>
+        <p><strong>SWITCH</strong> (Layer 2 - Data Link): forwards data only to the correct port using a MAC address table, supports full-duplex, and gives each port its own collision domain. It's the standard device in modern LANs.</p>
+        <p><strong>ROUTER</strong> (Layer 3 - Network): routes data between different networks using IP addresses, connects a LAN to a WAN (like the internet), and separates broadcast domains.</p>
+      </div>
+      <div class="col-ar"><div class="col-label">العربية</div>
+        <p><strong>الهب (HUB)</strong> — بيشتغل على Layer 1، بيستقبل البيانات وبيبعتها لكل البورتات من غير ما يفكر مين المفروض ياخدها. مفيش فلترة، وبيشتغل half-duplex بس، وكل الأجهزة بتشارك نفس الـ collision domain. رخيص لكن دلوقتي بقى قديم ومش بيتستخدم.</p>
+        <p><strong>السويتش (SWITCH)</strong> — بيشتغل على Layer 2، وعنده "دفتر عناوين" اسمه MAC address table بيعرف بيه كل جهاز موصول ببورت رقم كام، فبيبعت البيانات للبورت الصح بس مش لكل حد. بيشتغل full-duplex، وكل بورت له collision domain لوحده. هو الجهاز الأساسي في أي شبكة حديثة.</p>
+        <p><strong>الراوتر (ROUTER)</strong> — بيشتغل على Layer 3، وبيوجّه البيانات بين شبكات مختلفة تمامًا (زي إنه يوصل شبكة البيت بالإنترنت) باستخدام عنوان الـ IP مش الـ MAC، وبيفصل الـ broadcast domains عن بعض.</p>
+      </div>
+    </div>
+    <div class="highlight-row">
+      <div class="hl-en">The 3 devices map directly to the first 3 OSI layers: HUB = Physical, SWITCH = Data Link, ROUTER = Network.</div>
+      <div class="hl-ar">الأجهزة التلاتة دي بتتوازى بالظبط مع أول 3 طبقات في OSI: الهب = Physical، السويتش = Data Link، الراوتر = Network.</div>
+    </div>
+    <div class="example-box">
+      <span class="ex-label">EXAMPLE — مثال</span>
+      <div class="ex-en">Imagine 4 PCs (A, B, C, D) all plugged into a <strong>HUB</strong>. PC-A sends data to PC-C → the hub blasts it to B, C, and D all at once; B and D receive junk they must discard. Now replace with a <strong>SWITCH</strong> → it sends only to PC-C's port. Add a <strong>ROUTER</strong> between that LAN and the internet → it forwards traffic using IP addresses across networks.</div>
+      <div class="ex-ar">تخيل 4 أجهزة (A, B, C, D) كلها موصلة بـ<strong>HUB</strong>. لما A يبعت لـ C → الهب يبعتها لـ B وC وD كلهم مع بعض، وB وD يستقبلوا بيانات مش ليهم ويتجاهلوها. دلوقتي استبدل بـ<strong>SWITCH</strong> → بيبعت فقط للبورت بتاع C. ضيف <strong>ROUTER</strong> بين الشبكة دي والإنترنت → بيمشي البيانات بين شبكتين مختلفتين باستخدام IP.</div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <div class="block-title-bar"><span class="btitle-en">5 · Network Topologies</span><span class="btitle-sep">|</span><span class="btitle-ar">توبولوجيا الشبكات</span></div>
+    <div class="bilingual-grid">
+      <div class="col-en"><div class="col-label">ENGLISH</div>
+        <p><strong>Star</strong> — all devices connect to a central switch. Easy to manage, one device failing doesn't affect others, but the whole network dies if the central switch fails. Most common LAN design.</p>
+        <p><strong>Bus</strong> — all devices share one backbone cable. Cheap and simple, but if the cable breaks the whole network goes down, and it's slow with many devices.</p>
+        <p><strong>Ring</strong> — each device connects to exactly two neighbors forming a closed loop; data travels in one direction. Equal access for all, but one broken link can disrupt the whole ring.</p>
+        <p><strong>Mesh</strong> — every device connects to many/all others. Extremely fault-tolerant and redundant, but expensive and complex to wire.</p>
+        <p><strong>Hybrid</strong> — combines two or more topologies (e.g. star backbone + several bus segments) to fit large, real-world enterprise networks.</p>
+      </div>
+      <div class="col-ar"><div class="col-label">العربية</div>
+        <p><strong>النجمة (Star)</strong> — كل الأجهزة متوصلة بسويتش مركزي في النص. سهلة الإدارة، ولو جهاز واحد عطل الباقي مش بيتأثر، بس لو السويتش المركزي نفسه عطل الشبكة كلها بتقع. هي التصميم الأكتر انتشارًا في أي مكتب أو مدرسة.</p>
+        <p><strong>الناقل (Bus)</strong> — كل الأجهزة مشتركة في كابل واحد رئيسي (Backbone). رخيصة وبسيطة، بس لو الكابل اتقطع الشبكة كلها بتقع، وبتبقى بطيئة لما عدد الأجهزة يزيد.</p>
+        <p><strong>الحلقة (Ring)</strong> — كل جهاز متوصل بجهازين بس جنبه، وبيتكون شكل حلقة مقفولة، والبيانات بتدور في اتجاه واحد. كل الأجهزة عندها نفس فرصة الإرسال، بس لو وصلة واحدة اتقطعت الحلقة كلها بتتعطل.</p>
+        <p><strong>الشبكية (Mesh)</strong> — كل جهاز متوصل بأكتر من جهاز أو بكل الأجهزة التانية. أعلى درجة أمان وموثوقية لأن فيه مسارات بديلة كتير، بس غالية جدًا ومعقدة في التوصيل.</p>
+        <p><strong>الهجينة (Hybrid)</strong> — بتجمع بين اتنين أو أكتر من التوبولوجيز دي مع بعض (زي نجمة في النص وشبكة Bus فروع منها) عشان تناسب شبكات الشركات الكبيرة الحقيقية.</p>
+      </div>
+    </div>
+    <div class="highlight-row">
+      <div class="hl-en">More redundancy (Mesh) always trades off against more cost and complexity — there's no free lunch in topology design.</div>
+      <div class="hl-ar">كل ما زادت الموثوقية (زي Mesh) كل ما زادت التكلفة والتعقيد — مفيش تصميم مثالي من غير تنازلات.</div>
+    </div>
+    <div class="example-box">
+      <span class="ex-label">EXAMPLE — مثال</span>
+      <div class="ex-en"><strong>Star:</strong> Your home Wi-Fi — all phones, laptops, and TVs connect to the router (center). If the router dies, everyone loses connection. <strong>Bus:</strong> Old cable TV networks where one main cable served the whole street. <strong>Ring:</strong> Some older industrial control networks. <strong>Mesh:</strong> The internet's backbone routers — multiple paths exist so if one cable is cut, traffic reroutes automatically. <strong>Hybrid:</strong> Delta University — star topology inside each building, connected to a WAN backbone between campuses.</div>
+      <div class="ex-ar"><strong>Star:</strong> Wi-Fi البيت — كل التليفونات واللابتوبات بتتوصل بالراوتر (المركز). لو الراوتر عطل، الكل اتقطع. <strong>Bus:</strong> شبكات الكابل القديمة اللي كابل واحد كان بيخدم الشارع كله. <strong>Ring:</strong> بعض شبكات التحكم الصناعي القديمة. <strong>Mesh:</strong> راوترات backbone الإنترنت العالمي — فيه مسارات بديلة كتير، لو كابل اتقطع البيانات بتلاقي طريق تاني أوتوماتيك. <strong>Hybrid:</strong> جامعة الدلتا — Star جوه كل مبنى، وكلها متوصلة ببعض عبر WAN backbone.</div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <div class="block-title-bar"><span class="btitle-en">6 · Firewalls</span><span class="btitle-sep">|</span><span class="btitle-ar">جدران الحماية</span></div>
+    <div class="bilingual-grid">
+      <div class="col-en"><div class="col-label">ENGLISH</div>
+        <p>A <strong>firewall</strong> sits between a trusted network and an untrusted one (like the internet) and decides what traffic is allowed in or out.</p>
+        <p><strong>Packet filtering firewall</strong> — checks only the packet's header (sender IP, receiver IP, port number) against an access control list. Simple, cheap, but low security since it never inspects the actual payload.</p>
+        <p><strong>Stateful inspection firewall</strong> — keeps a "conversation list" of active connections, so it can tell if incoming traffic is a real reply to something the user requested. More secure than simple packet filtering.</p>
+        <p><strong>Proxy firewall</strong> — acts as a middleman: the user's request goes to the proxy first, and the proxy forwards it to the internet on the user's behalf, hiding the internal network.</p>
+        <p><strong>WAF (Web Application Firewall)</strong> — works at the application layer, filtering HTTP/HTTPS traffic specifically to protect web servers.</p>
+        <p><strong>NGFW (Next-Generation Firewall)</strong> — adds URL/web filtering, Deep Packet Inspection (DPI) that reads the actual payload, and an Intrusion Prevention System (IPS).</p>
+      </div>
+      <div class="col-ar"><div class="col-label">العربية</div>
+        <p><strong>الفايروول (Firewall)</strong> بيتحط بين الشبكة الموثوقة (زي شبكة الشركة) وشبكة مش موثوقة (زي الإنترنت)، وبيقرر أي بيانات تدخل أو تخرج.</p>
+        <p><strong>Packet filtering firewall</strong> — بيبص بس على "الهيدر" بتاع الباكت (IP المرسِل، IP المستقبِل، رقم البورت) ويقارنه بقايمة صلاحيات (Access Control List). بسيط ورخيص، لكن أمانه ضعيف لأنه أبدًا مش بيفحص المحتوى الفعلي (Payload) جوه الباكت.</p>
+        <p><strong>Stateful inspection firewall</strong> — بيحتفظ بـ"قايمة محادثات" لكل الاتصالات الشغالة، فبيقدر يميز إن البيانات الجاية فعلًا رد على طلب المستخدم نفسه ولا لأ. ده بيخليه أأمن من الـ packet filtering العادي.</p>
+        <p><strong>Proxy firewall</strong> — بيشتغل زي وسيط: طلب المستخدم بيروح للـ proxy الأول، والـ proxy هو اللي بيبعته للإنترنت بالنيابة عنه، وده بيخفي الشبكة الداخلية عن أي حد بره.</p>
+        <p><strong>WAF (Web Application Firewall)</strong> — بيشتغل على طبقة التطبيقات، وبيراقب حركة HTTP/HTTPS تحديدًا عشان يحمي سيرفرات المواقع من الهجمات.</p>
+        <p><strong>NGFW (Next-Generation Firewall)</strong> — بيضيف فلترة للمواقع (URL filtering)، وفحص عميق لمحتوى الباكت نفسه (DPI)، ونظام لمنع التسلل (IPS) اللي بيكتشف ويوقف الهجمات قبل ما توصل.</p>
+      </div>
+    </div>
+    <div class="highlight-row">
+      <div class="hl-en">Each firewall generation inspects one layer deeper than the last: header → connection state → application content.</div>
+      <div class="hl-ar">كل جيل فايروول بيبص لطبقة أعمق من اللي قبله: الهيدر بس → حالة الاتصال → محتوى التطبيق نفسه.</div>
+    </div>
+    <div class="example-box">
+      <span class="ex-label">EXAMPLE — مثال</span>
+      <div class="ex-en"><strong>Packet filtering:</strong> Rule says "block all traffic from IP 192.168.1.5 on port 80" — it checks the header only, doesn't care what data is inside. <strong>Stateful:</strong> You open youtube.com → firewall logs the outgoing request. When YouTube's response arrives, the firewall checks "did we ask for this?" and allows it. A random unsolicited packet gets dropped. <strong>Proxy:</strong> Used in schools to hide student PCs — all requests appear to come from one proxy IP. <strong>WAF:</strong> Protects a bank's website from SQL injection attacks in HTTP requests. <strong>NGFW:</strong> Detects malware hiding inside a PDF attached to an email, even though the email itself arrived on allowed port 25.</div>
+      <div class="ex-ar"><strong>Packet filtering:</strong> قاعدة بتقول "امنع أي حاجة من IP 192.168.1.5 على بورت 80" — بيبص على الهيدر بس، مش مهمه إيه جوه الباكت. <strong>Stateful:</strong> فتحت youtube.com → الفايروول سجّل الطلب. لما رد يوتيوب وصل، بيسأل "احنا طلبنا ده؟" ويسمح بيه. باكت جاية من غير ما طلبناها بتتحذف. <strong>Proxy:</strong> بيتستخدم في المدارس عشان يخفي أجهزة الطلاب — كل الطلبات بتظهر وكأنها جاية من IP الـ proxy واحد بس. <strong>WAF:</strong> بيحمي موقع بنك من هجمات SQL injection جوه الـ HTTP requests. <strong>NGFW:</strong> بيكتشف malware مخبي جوه PDF في إيميل، حتى لو الإيميل نفسه وصل على بورت 25 المسموح بيه.</div>
+    </div>
+  </div>
+
+  <div class="summary-block">
+    <h3>ملخص المحاضرة 01 — مقدمة في شبكات الاتصالات</h3>
+    <div class="summary-content">
+      <p>📡 الاتصال بالبيانات (Data Communications) محتاج 5 عناصر: Message, Sender, Receiver, Medium, Protocol.</p>
+      <p>🔁 تدفق البيانات 3 أنواع: Simplex (اتجاه واحد)، Half-duplex (بالدور)، Full-duplex (مع بعض).</p>
+      <p>🔗 الاتصال إما Point-to-point (جهازين بس) أو Multipoint (أكتر من جهاز على نفس الرابط).</p>
+      <p>🌍 الشبكات بتتصنف حسب المدى: LAN لمبنى، MAN لمدينة، WAN لدولة أو أكتر.</p>
+      <p>🖧 HUB (Layer 1) يبعت لكل حد، SWITCH (Layer 2) يبعت للبورت الصح باستخدام MAC، ROUTER (Layer 3) يوصل شبكات مختلفة باستخدام IP.</p>
+      <p>🔺 التوبولوجيز: Star (الأشهر)، Bus (رخيصة بس نقطة فشل واحدة)، Ring (متساوية بس هشة)، Mesh (أأمن بس غالية)، Hybrid (خليط لشبكات الشركات).</p>
+      <p>🛡️ الفايروولز بتتطور من فحص الهيدر بس (Packet filtering)، لتتبع الاتصال (Stateful)، لإخفاء الشبكة (Proxy)، لحد فحص المحتوى الكامل والحماية من الاختراق (NGFW).</p>
+    </div>
+  </div>
+
+  <div class="quiz-section">
+    <div class="quiz-title">Quiz — Introduction to Communication Networks</div>
+    <div class="quiz-subtitle">15 سؤال — اختر الإجابة الصحيحة، الشرح بالعربي هيظهر بعد كل إجابة</div>
+  </div>
+</div>
+`;
+
+const CN_QUIZ = [
+  {q:"Which of the following is NOT one of the 5 components of a data communications system?",opts:["Message","Protocol","Transmission medium","Bandwidth pricing"],a:3,ex:"العناصر الخمسة زي ما اتقالت في المحاضرة هي: Message, Sender, Receiver, Transmission medium, Protocol. سعر الـ bandwidth مش عنصر من عناصر النظام أصلًا."},
+  {q:"The set of rules that governs how communication between sender and receiver happens is called:",opts:["The medium","The protocol","The node","The topology"],a:1,ex:"الـ Protocol هو مجموعة القواعد اللي بتحكم عملية الاتصال، ولازم تكون موجودة عند المُرسِل والمُستقبِل بنفس الشكل عشان يفهموا بعض."},
+  {q:"A TV broadcast, where the signal only goes from the station to your TV, is an example of:",opts:["Simplex","Half-duplex","Full-duplex","Multipoint"],a:0,ex:"الـ Simplex اتصال في اتجاه واحد بس — التلفزيون بيستقبل ومش بيبعت حاجة للمحطة، زي الكيبورد اللي بيبعت للشاشة بس."},
+  {q:"Walkie-talkies, where only one person can talk at a time, use which data flow mode?",opts:["Simplex","Half-duplex","Full-duplex","Point-to-point only"],a:1,ex:"الـ Half-duplex معناه إن كل محطة تقدر تبعت وتستقبل بس مش في نفس اللحظة — زي اللاسلكي لما لازم توقف عشان الطرف التاني يتكلم."},
+  {q:"A normal phone call where both people speak and hear at the same time is:",opts:["Simplex","Half-duplex","Full-duplex","Broadcast"],a:2,ex:"الـ Full-duplex هو إن الاتنين بيبعتوا ويستقبلوا في نفس الوقت من غير ما يستنوا بعض، زي المكالمة التليفونية العادية."},
+  {q:"A dedicated link reserved entirely for exactly two devices is called:",opts:["Multipoint connection","Point-to-point connection","A WAN","A protocol"],a:1,ex:"الـ Point-to-point رابط مخصص بين جهازين بس، وكل سعة الرابط محجوزة ليهم الاتنين وحدهم — عكس الـ Multipoint اللي بيشاركوه أكتر من جهازين."},
+  {q:"A classroom Wi-Fi router that 30 students connect to at the same time is an example of:",opts:["Point-to-point connection","Multipoint connection","Simplex flow","A WAN topology"],a:1,ex:"الـ Multipoint معناه إن أكتر من جهازين بيشاركوا نفس الرابط أو الوسيط — زي راوتر الـ Wi-Fi اللي كل الطلاب متوصلين بيه مع بعض."},
+  {q:"Which of these correctly orders networks from smallest to largest geographic coverage?",opts:["WAN → MAN → LAN","LAN → MAN → WAN","MAN → LAN → WAN","LAN → WAN → MAN"],a:1,ex:"الـ LAN بيغطي مبنى أو كامبس واحد، الـ MAN بيغطي مدينة كاملة، والـ WAN بيغطي دولة أو قارة زي الإنترنت — فالترتيب من الأصغر للأكبر هو LAN ثم MAN ثم WAN."},
+  {q:"Which device operates at Layer 1 (Physical) and broadcasts incoming data to all ports blindly?",opts:["Router","Switch","Hub","Firewall"],a:2,ex:"الـ HUB بيشتغل على Layer 1، مفيش فلترة خالص وبيبعت لكل البورتات من غير ما يعرف مين المفروض ياخدها، وكل الأجهزة بتشارك نفس الـ collision domain."},
+  {q:"A device that forwards data only to the correct port using a MAC address table is a:",opts:["Hub","Switch","Router","Proxy"],a:1,ex:"الـ SWITCH بيشتغل على Layer 2 وعنده MAC address table بيعرف بيه أي جهاز موصول ببورت رقم كام، فبيبعت البيانات للبورت الصح بس."},
+  {q:"Which device connects a LAN to a WAN using IP addresses and separates broadcast domains?",opts:["Hub","Switch","Router","Repeater"],a:2,ex:"الـ ROUTER بيشتغل على Layer 3 وبيوجّه البيانات بين شبكات مختلفة باستخدام عنوان الـ IP مش الـ MAC، وبيفصل الـ broadcast domains عن بعض."},
+  {q:"In which network topology do all devices connect to one central switch, so one device failing doesn't affect the others?",opts:["Bus","Ring","Star","Mesh"],a:2,ex:"في الـ Star topology كل الأجهزة متوصلة بسويتش مركزي، فلو جهاز واحد عطل الباقي مش بيتأثر — بس لو السويتش المركزي نفسه عطل الشبكة كلها بتقع."},
+  {q:"Which topology gives the highest fault tolerance because every device connects to many/all others, but is expensive and complex?",opts:["Bus","Star","Mesh","Ring"],a:2,ex:"الـ Mesh topology كل جهاز فيها متوصل بأكتر من جهاز أو بكل الأجهزة، فبتكون فيه مسارات بديلة كتير وأعلى درجة موثوقية، بس غالية ومعقدة في التوصيل."},
+  {q:"A firewall that only checks the packet's header (sender IP, receiver IP, port) against an access control list is called:",opts:["Stateful inspection firewall","Packet filtering firewall","Proxy firewall","NGFW"],a:1,ex:"الـ Packet filtering firewall بيبص بس على هيدر الباكت (IP المرسِل، IP المستقبِل، رقم البورت) ويقارنه بقايمة صلاحيات — بسيط ورخيص لكن أمانه ضعيف لأنه مش بيفحص المحتوى الفعلي."},
+  {q:"A firewall that keeps a 'conversation list' of active connections so it can tell if incoming traffic is a real reply to a request is:",opts:["Packet filtering firewall","Stateful inspection firewall","Proxy firewall","WAF"],a:1,ex:"الـ Stateful inspection firewall بيتتبع حالة الاتصال (هل احنا طلبنا الرد ده ولا لأ)، وده بيخليه أأمن من الـ Packet filtering اللي بيبص على الهيدر بس من غير سياق."}
+];
+
+const DM_LEC01_HTML = `
+<div class="lec-page" id="dm-lec01">
+  <div class="page-header">
+    <span class="page-lec-num">LECTURE 01</span>
+    <div class="page-title-wrap"><h2>Introduction to Data Mining<span>مقدمة في التنقيب في البيانات</span></h2></div>
+  </div>
+
+  <div class="content-block">
+    <div class="block-title-bar"><span class="btitle-en">1 · Why Data Mining?</span><span class="btitle-sep">|</span><span class="btitle-ar">ليه Data Mining؟</span></div>
+    <div class="bilingual-grid">
+      <div class="col-en"><div class="col-label">ENGLISH</div>
+        <p>We live in an era of <strong>explosive data growth</strong> — from terabytes to petabytes. Data comes from everywhere: e-commerce transactions, web clicks, social media, sensors, scientific simulations, and digital cameras.</p>
+        <ul>
+          <li><strong>Business:</strong> web, e-commerce, transactions, stocks.</li>
+          <li><strong>Science:</strong> remote sensing, bioinformatics, simulations.</li>
+          <li><strong>Society:</strong> news, YouTube, digital images.</li>
+        </ul>
+        <p>We are <strong>drowning in data but starving for knowledge</strong> — so we need automated analysis of massive datasets, which is exactly what data mining provides.</p>
+      </div>
+      <div class="col-ar"><div class="col-label">العربية</div>
+        <p>إحنا عايشين في زمن البيانات بتتولد بشكل رهيب — من <strong>terabytes</strong> لـ <strong>petabytes</strong>. البيانات جاية من كل حتة: مشتريات أونلاين، نقرات على المواقع، سوشيال ميديا، حساسات، ومحاكاة علمية.</p>
+        <ul>
+          <li><strong>Business:</strong> المواقع، التجارة الإلكترونية، المعاملات، البورصة.</li>
+          <li><strong>Science:</strong> الاستشعار عن بُعد، الـ bioinformatics، المحاكاة.</li>
+          <li><strong>Society:</strong> الأخبار، يوتيوب، الصور الرقمية.</li>
+        </ul>
+        <p>الخلاصة: إحنا <strong>غرقانين في الداتا بس محتاجين المعرفة</strong> — وعشان كده محتاجين تحليل أوتوماتيكي للداتا الضخمة، وده بالظبط اللي بتعمله الـ <strong>Data Mining</strong>.</p>
+      </div>
+    </div>
+    <div class="highlight-row">
+      <div class="hl-en">Data is growing faster than humans can read it — data mining turns raw data into usable knowledge automatically.</div>
+      <div class="hl-ar">البيانات بتزيد أسرع من قدرتنا على قراءتها — الـ Data Mining بيحوّل الداتا الخام لمعرفة قابلة للاستخدام بشكل أوتوماتيكي.</div>
+    </div>
+    <div class="example-box">
+      <span class="ex-label">EXAMPLE — مثال</span>
+      <div class="ex-en">Walmart records millions of transactions every day. Data mining analyzes these transactions to discover that customers who buy diapers often buy beer too — a pattern no human would notice by reading receipts one by one.</div>
+      <div class="ex-ar">وول مارت بتسجل ملايين المعاملات يوميًا. الـ Data Mining بيحلل المعاملات دي ويكتشف إن اللي بيشتري حفاضات غالبًا بيشتري بيرة كمان — وده نمط مستحيل إنسان يلاحظه لو قرا الإيصالات واحد واحد.</div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <div class="block-title-bar"><span class="btitle-en">2 · What Is Data Mining?</span><span class="btitle-sep">|</span><span class="btitle-ar">إيه هي الـ Data Mining؟</span></div>
+    <div class="bilingual-grid">
+      <div class="col-en"><div class="col-label">ENGLISH</div>
+        <p><strong>Data mining</strong> is the extraction of <strong>interesting patterns or knowledge</strong> from huge amounts of data — patterns that are <strong>non-trivial, implicit, previously unknown, and potentially useful</strong>.</p>
+        <p>Also known as <strong>Knowledge Discovery in Databases (KDD)</strong>, knowledge extraction, data/pattern analysis, and business intelligence.</p>
+        <p>Data mining sits at the intersection of: <strong>machine learning, statistics, databases, pattern recognition, visualization</strong>, and high-performance computing.</p>
+      </div>
+      <div class="col-ar"><div class="col-label">العربية</div>
+        <p><strong>Data Mining</strong> يعني استخراج <strong>أنماط ومعرفة مفيدة</strong> من كميات ضخمة من البيانات — أنماط تكون <strong>مش واضحة، مخفية، مش معروفة قبل كده، وممكن تفيدنا</strong>.</p>
+        <p>ليها أسماء تانية كتير زي <strong>Knowledge Discovery in Databases (KDD)</strong>، استخراج المعرفة، تحليل البيانات، و Business Intelligence.</p>
+        <p>الـ Data Mining تقاطع بين <strong>Machine Learning</strong> و<strong>Statistics</strong> و<strong>Databases</strong> و<strong>Pattern Recognition</strong> والـ <strong>Visualization</strong> والـ High-Performance Computing.</p>
+      </div>
+    </div>
+    <div class="highlight-row">
+      <div class="hl-en">Data mining is not just querying data — it discovers hidden, valuable patterns you never asked about directly.</div>
+      <div class="hl-ar">الـ Data Mining مش مجرد استعلام عن البيانات — هي اكتشاف أنماط مخفية وقيّمة إنت أصلاً ما سألتش عنها.</div>
+    </div>
+    <div class="example-box">
+      <span class="ex-label">EXAMPLE — مثال</span>
+      <div class="ex-en">A supermarket asks "Which products are bought together?" Data mining finds the rule {Diaper → Beer} with support 0.5% and confidence 75% — knowledge that was hiding in millions of receipts.</div>
+      <div class="ex-ar">سوبرماركت بيسأل: "أيه المنتجات اللي بتتشتري مع بعض؟" الـ Data Mining بتطلع القاعدة {Diaper → Beer} بـ support 0.5% و confidence 75% — معرفة كانت مخبية في ملايين الإيصالات.</div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <div class="block-title-bar"><span class="btitle-en">3 · The KDD Process</span><span class="btitle-sep">|</span><span class="btitle-ar">مراحل الـ KDD Process</span></div>
+    <div class="bilingual-grid">
+      <div class="col-en"><div class="col-label">ENGLISH</div>
+        <p><strong>Data mining is one step inside the larger KDD process</strong>. The pipeline:</p>
+        <ul>
+          <li><strong>Pre-processing:</strong> data integration, normalization, feature selection, dimension reduction, cleaning.</li>
+          <li><strong>Data mining:</strong> pattern discovery — association, classification, clustering, outlier analysis.</li>
+          <li><strong>Post-processing:</strong> pattern evaluation, selection, interpretation, and visualization.</li>
+        </ul>
+        <p>Garbage in, garbage out — quality of mining depends heavily on pre-processing.</p>
+      </div>
+      <div class="col-ar"><div class="col-label">العربية</div>
+        <p>الـ <strong>Data Mining</strong> خطوة واحدة بس جوه عملية <strong>KDD</strong> أكبر منها. المراحل:</p>
+        <ul>
+          <li><strong>Pre-processing:</strong> دمج البيانات، الـ normalization، اختيار الـ features، تقليل الأبعاد، والتنظيف.</li>
+          <li><strong>Data mining:</strong> اكتشاف الأنماط — association، classification، clustering، و outlier analysis.</li>
+          <li><strong>Post-processing:</strong> تقييم الأنماط، اختيار المفيد منها، تفسيره، وعرضه بصريًا.</li>
+        </ul>
+        <p>قاعدة ذهبية: لو دخلت بيانات وحش هيطلع نتائج وحش — جودة الـ mining بتعتمد بشكل كبير على مرحلة الـ pre-processing.</p>
+      </div>
+    </div>
+    <div class="highlight-row">
+      <div class="hl-en">KDD is a pipeline: prepare first, mine second, evaluate last — mining is only the middle step.</div>
+      <div class="hl-ar">الـ KDD خط إنتاج: نجهز الأول، نستخرج بعدين، نقيّم في الآخر — الـ mining مجرد خطوة في النص.</div>
+    </div>
+    <div class="example-box">
+      <span class="ex-label">EXAMPLE — مثال</span>
+      <div class="ex-en">A telecom company collects call records from 3 different systems. First they integrate and clean the data (pre-processing), then mine rules connecting alarms (mining), then keep only rules engineers confirm as useful (post-processing).</div>
+      <div class="ex-ar">شركة اتصالات بتجمع سجلات المكالمات من 3 أنظمة مختلفة. الأول بتدمج البيانات وتنظفها (pre-processing)، بعدين بتستخرج قواعد بتوضح علاقة الأعطال ببعض (mining)، وأخيرًا بتحتفظ بس بالقواعد اللي المهندسين أكدوا إنها مفيدة (post-processing).</div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <div class="block-title-bar"><span class="btitle-en">4 · Classification</span><span class="btitle-sep">|</span><span class="btitle-ar">التصنيف (Classification)</span></div>
+    <div class="bilingual-grid">
+      <div class="col-en"><div class="col-label">ENGLISH</div>
+        <p><strong>Classification</strong> is a <strong>supervised learning</strong> task: build a <strong>model</strong> from labeled training data, then use it to predict the class label of new, unknown records.</p>
+        <ul>
+          <li><strong>Input:</strong> training set with known labels (e.g., Credit Worthy: Yes/No).</li>
+          <li><strong>Output:</strong> a classifier (e.g., a decision tree).</li>
+          <li><strong>Methods:</strong> decision trees, naïve Bayes, SVM, neural networks, logistic regression.</li>
+        </ul>
+        <p>Data is split into a <strong>training set</strong> (to learn) and a <strong>test set</strong> (to evaluate).</p>
+      </div>
+      <div class="col-ar"><div class="col-label">العربية</div>
+        <p>الـ <strong>Classification</strong> مهمة <strong>supervised learning</strong>: بنبني <strong>موديل</strong> من بيانات تدريب ليها labels معروفة، وبعدين نستخدمه للتنبؤ بـ class بتاع سجلات جديدة مجهولة.</p>
+        <ul>
+          <li><strong>المدخل:</strong> training set فيه labels (مثلاً Credit Worthy: Yes/No).</li>
+          <li><strong>المخرج:</strong> classifier (مثلاً decision tree).</li>
+          <li><strong>الطرق:</strong> decision trees، naïve Bayes، SVM، neural networks، logistic regression.</li>
+        </ul>
+        <p>بنقسم البيانات لـ <strong>training set</strong> (الموديل يتعلم منها) و<strong>test set</strong> (نقيّم بيها أداء الموديل).</p>
+      </div>
+    </div>
+    <div class="highlight-row">
+      <div class="hl-en">Classification learns from examples with known answers to assign the right answer to new examples.</div>
+      <div class="hl-ar">الـ Classification بتتعلم من أمثلة الإجابة بتاعتها معروفة، عشان تدي الإجابة الصح للأمثلة الجديدة.</div>
+    </div>
+    <div class="example-box">
+      <span class="ex-label">EXAMPLE — مثال</span>
+      <div class="ex-en">A bank trains a classifier on past customers (Employed? Education? Years at address? → Credit Worthy). A decision tree learns: if unemployed and below graduate level → not credit worthy. This model then predicts new loan applicants.</div>
+      <div class="ex-ar">بنك بيدرب classifier على عملاء قدام (موظف؟ تعليمه إيه؟ قد إيه ساكن في نفس العنوان؟ → مستحق للائتمان). الـ decision tree بتتعلم: لو مش موظف ومستواه أقل من graduate → مش مستحق. وبعدين الموديل ده بيتنبأ بطلبات القروض الجديدة.</div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <div class="block-title-bar"><span class="btitle-en">5 · Regression</span><span class="btitle-sep">|</span><span class="btitle-ar">الانحدار (Regression)</span></div>
+    <div class="bilingual-grid">
+      <div class="col-en"><div class="col-label">ENGLISH</div>
+        <p><strong>Regression</strong> predicts the value of a <strong>continuous variable</strong> based on other variables, assuming a linear or nonlinear dependency model.</p>
+        <ul>
+          <li>Classification predicts a <strong>category</strong>; regression predicts a <strong>number</strong>.</li>
+          <li>Extensively studied in statistics and neural networks.</li>
+          <li>Examples: sales from advertising spend, wind velocity from weather data, stock index forecasting.</li>
+        </ul>
+      </div>
+      <div class="col-ar"><div class="col-label">العربية</div>
+        <p>الـ <strong>Regression</strong> بتتنبأ بقيمة <strong>رقم continuous</strong> بناءً على متغيرات تانية، بافتراض علاقة linear أو nonlinear بينهم.</p>
+        <ul>
+          <li>الـ Classification بتتنبأ بـ<strong>فئة</strong>؛ الـ Regression بتتنبأ بـ<strong>رقم</strong>.</li>
+          <li>مجال قديم ومتدرس جدًا في الـ statistics والـ neural networks.</li>
+          <li>أمثلة: توقع المبيعات من تكلفة الإعلانات، سرعة الرياح من حالة الطقس، وتوقع مؤشرات البورصة.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="highlight-row">
+      <div class="hl-en">When the answer is a number, not a label, the task is regression.</div>
+      <div class="hl-ar">لما الإجابة تكون رقم مش فئة، المهمة دي اسمها Regression.</div>
+    </div>
+    <div class="example-box">
+      <span class="ex-label">EXAMPLE — مثال</span>
+      <div class="ex-en">A company spends 10K on ads and wants to know expected sales. A regression model learns: sales ≈ 3 × advertising + 20 from historical data, and predicts 50K in sales for 10K spent.</div>
+      <div class="ex-ar">شركة بتصرف 10K على الإعلانات وعايزة تعرف المبيعات المتوقعة. موديل regression بتعلم من البيانات القديمة: المبيعات ≈ 3 × الإعلانات + 20، فبيتنبأ بمبيعات 50K لما تصرف 10K.</div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <div class="block-title-bar"><span class="btitle-en">6 · Cluster Analysis</span><span class="btitle-sep">|</span><span class="btitle-ar">تحليل التجميع (Clustering)</span></div>
+    <div class="bilingual-grid">
+      <div class="col-en"><div class="col-label">ENGLISH</div>
+        <p><strong>Clustering</strong> is <strong>unsupervised learning</strong>: class labels are unknown, and the algorithm groups objects so objects in the same cluster are similar and different from other clusters.</p>
+        <ul>
+          <li>Principle: <strong>maximize intra-cluster similarity</strong> and <strong>minimize inter-cluster similarity</strong>.</li>
+          <li>Used for: customer profiling, document grouping, genes with similar function, summarizing large datasets.</li>
+          <li>Classic algorithm: <strong>K-means</strong>.</li>
+        </ul>
+      </div>
+      <div class="col-ar"><div class="col-label">العربية</div>
+        <p>الـ <strong>Clustering</strong> نوع من الـ <strong>unsupervised learning</strong>: الـ labels مش معروفة أصلًا، والخوارزمية بتجمع العناصر المتشابهة في clusters، والعناصر في clusters مختلفة تكون بعيدة عن بعض.</p>
+        <ul>
+          <li>المبدأ: <strong>نزود التشابه جوه الـ cluster</strong> و<strong>نقلل التشابه بين الـ clusters المختلفة</strong>.</li>
+          <li>بتتستخدم في: customer profiling، تجميع مستندات، جينات وظيفتها واحدة، وتصغير الداتاسيتس الكبيرة.</li>
+          <li>أشهر خوارزمية: <strong>K-means</strong>.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="highlight-row">
+      <div class="hl-en">Clustering finds the natural groups in data when nobody tells you what the groups are.</div>
+      <div class="hl-ar">الـ Clustering بتلاقي المجموعات الطبيعية في البيانات وأنت مش عارف أصلاً إيه المجموعات دي.</div>
+    </div>
+    <div class="example-box">
+      <span class="ex-label">EXAMPLE — مثال</span>
+      <div class="ex-en">An e-commerce company has no predefined customer categories. Clustering groups customers by purchase behavior into 4 segments — "big spenders", "discount hunters", "occasional buyers" — and marketing targets each segment differently.</div>
+      <div class="ex-ar">شركة تجارة إلكترونية ماعندهاش فئات للعملاء. الـ Clustering بتقسمهم حسب سلوك الشراء لـ 4 شرائح — "اللي بيصرفوا كتير"، "اللي بيدوروا على الخصومات"، "اللي بيشتروا أحيانًا" — وبعدين التسويق بيستهدف كل شريحة بطريقة مختلفة.</div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <div class="block-title-bar"><span class="btitle-en">7 · Association Rule Discovery</span><span class="btitle-sep">|</span><span class="btitle-ar">اكتشاف قواعد الارتباط</span></div>
+    <div class="bilingual-grid">
+      <div class="col-en"><div class="col-label">ENGLISH</div>
+        <p><strong>Association rule mining</strong> finds dependency rules that predict one item based on other items in a transaction.</p>
+        <ul>
+          <li><strong>Frequent itemsets:</strong> sets of items appearing together often.</li>
+          <li><strong>Rule format:</strong> {Diaper → Beer} with <strong>support</strong> (how often) and <strong>confidence</strong> (how reliable).</li>
+          <li><strong>Association ≠ causality:</strong> items bought together are not necessarily causes of each other.</li>
+          <li>Applications: market-basket analysis, telecom alarm diagnosis, medical informatics.</li>
+        </ul>
+      </div>
+      <div class="col-ar"><div class="col-label">العربية</div>
+        <p>الـ <strong>Association rule mining</strong> بتلاقي قواعد بتتنبأ بحدوث منتج معين بناءً على وجود منتجات تانية في نفس المعاملة.</p>
+        <ul>
+          <li><strong>Frequent itemsets:</strong> مجموعات منتجات بتظهر مع بعض بشكل متكرر.</li>
+          <li><strong>شكل القاعدة:</strong> {Diaper → Beer} مع الـ<strong>support</strong> (بتتكرر قد إيه) والـ<strong>confidence</strong> (مضمونة قد إيه).</li>
+          <li><strong>مهم جدًا:</strong> الارتباط مش سببية — حاجتين بتتشتروا مع بعض مش معناه إن واحدة بتسبب التانية.</li>
+          <li>التطبيقات: تحليل سلة المشتريات، تشخيص أعطال الاتصالات، المعلوماتية الطبية.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="highlight-row">
+      <div class="hl-en">Association rules reveal which items travel together — useful, but correlation does not mean causation.</div>
+      <div class="hl-ar">قواعد الارتباط بتكشف أنهي حاجات بتتجمع مع بعض — مفيدة جدًا، بس الارتباط مش معناه سببية.</div>
+    </div>
+    <div class="example-box">
+      <span class="ex-label">EXAMPLE — مثال</span>
+      <div class="ex-en">From 5 transactions, mining discovers {Milk → Coke} and {Diaper, Milk → Beer}. The rule {Diaper, Milk → Beer} means: when a customer buys diapers AND milk, there is a high chance they also buy beer.</div>
+      <div class="ex-ar">من 5 معاملات بس، بنكتشف {Milk → Coke} و{Diaper, Milk → Beer}. قاعدة {Diaper, Milk → Beer} معناها: لما العميل يشتري حفاضات وحليب، في احتمال كبير إنه يشتري بيرة كمان.</div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <div class="block-title-bar"><span class="btitle-en">8 · Challenges & Applications</span><span class="btitle-sep">|</span><span class="btitle-ar">التحديات والتطبيقات</span></div>
+    <div class="bilingual-grid">
+      <div class="col-en"><div class="col-label">ENGLISH</div>
+        <p><strong>Key challenges:</strong></p>
+        <ul>
+          <li><strong>Scalability</strong> — algorithms must handle terabytes.</li>
+          <li><strong>High dimensionality</strong> — thousands of attributes per record.</li>
+          <li><strong>Heterogeneous and complex data</strong> — text, images, graphs, time series.</li>
+          <li><strong>Data ownership and distribution</strong> — data spread across sites and organizations.</li>
+          <li><strong>Non-traditional analysis</strong> — no explicit query, patterns are the output.</li>
+        </ul>
+        <p><strong>Applications:</strong> web page analysis & PageRank, recommender systems, targeted marketing, bioinformatics, medical analysis, software engineering.</p>
+      </div>
+      <div class="col-ar"><div class="col-label">العربية</div>
+        <p><strong>التحديات الأساسية:</strong></p>
+        <ul>
+          <li><strong>Scalability</strong> — الخوارزميات لازم تستحمل terabytes من البيانات.</li>
+          <li><strong>High dimensionality</strong> — آلاف الـ attributes في السجل الواحد.</li>
+          <li><strong>Heterogeneous data</strong> — نصوص وصور وجرافات و time series مع بعض.</li>
+          <li><strong>Data ownership</strong> — البيانات موزعة على أماكن ومنظمات مختلفة.</li>
+          <li><strong>Non-traditional analysis</strong> — مفيش استعلام واضح، الناتج هو الأنماط نفسها.</li>
+        </ul>
+        <p><strong>التطبيقات:</strong> تحليل صفحات الويب و PageRank، أنظمة التوصية، التسويق المستهدف، الـ bioinformatics والتحليل الطبي، وهندسة البرمجيات.</p>
+      </div>
+    </div>
+    <div class="highlight-row">
+      <div class="hl-en">The bigger, more diverse, and more distributed the data, the harder mining becomes — and the more valuable its results.</div>
+      <div class="hl-ar">كل ما البيانات تكبر وتتنوع وتتوزع أكتر، الـ mining تبقى أصعب — ونتائجها تبقى أغلى.</div>
+    </div>
+    <div class="example-box">
+      <span class="ex-label">EXAMPLE — مثال</span>
+      <div class="ex-en">A hospital network mines patient records across 10 branches (distribution challenge), each record includes scans, doctor notes, and lab results (heterogeneous data), for thousands of patients (scalability).</div>
+      <div class="ex-ar">شبكة مستشفيات عايزة تعمل mining لسجلات المرضى في 10 فروع (تحدي التوزيع)، وكل سجل فيه أشعة وملاحظات دكاترة وتحاليل (تحدي تنوع البيانات)، لآلاف المرضى (تحدي الـ scalability).</div>
+    </div>
+  </div>
+
+  <div class="summary-block">
+    <h3>ملخص المحاضرة 01 — مقدمة في الـ Data Mining</h3>
+    <div class="summary-content">
+      <p>📌 <strong>Data Mining</strong> يعني استخراج أنماط ومعرفة <strong>مخفية ومفيدة</strong> من كميات ضخمة من البيانات — مش مجرد استعلام عادي.</p>
+      <p>📊 إحنا <strong>غرقانين في الداتا ومحتاجين المعرفة</strong>: البيانات بتتولد من البيزنس والعلوم والسوشيال بشكل أكبر من قدرتنا على قراءتها يدويًا.</p>
+      <p>🔧 الـ Data Mining خطوة جوه <strong>KDD</strong>: <strong>Pre-processing</strong> ← <strong>Data Mining</strong> ← <strong>Post-processing</strong>. لو دخلت بيانات وحش هيطلع نتائج وحش.</p>
+      <p>🏷️ <strong>Classification</strong>: supervised — بتتنبأ بـ<strong>فئة</strong> (مثلاً Credit Worthy: Yes/No) باستخدام موديل متدرب على labeled data.</p>
+      <p>🔢 <strong>Regression</strong>: بتتنبأ بـ<strong>رقم continuous</strong> (مثلاً المبيعات)، مش فئة.</p>
+      <p>🧩 <strong>Clustering</strong>: unsupervised — بتكتشف <strong>المجموعات الطبيعية</strong> من غير ما حد يقولها المجموعات إيه. مبدأها: زود التشابه جوه الـ cluster وقلل التشابه بين الـ clusters.</p>
+      <p>🛒 <strong>Association Rules</strong>: {Diaper → Beer} بالـ<strong>support</strong> والـ<strong>confidence</strong> — الارتباط <strong>مش سببية</strong>.</p>
+      <p>⚠️ أهم التحديات: <strong>Scalability</strong>، <strong>High dimensionality</strong>، تنوع البيانات، وتوزيع ملكيتها.</p>
+      <p>🚀 تطبيقات: market-basket analysis، fraud detection، recommender systems، الـ bioinformatics، وتحليل الويب.</p>
+    </div>
+  </div>
+
+  <div class="quiz-section">
+    <div class="quiz-title">Quiz — Introduction to Data Mining</div>
+    <div class="quiz-subtitle">10 أسئلة — اختبر نفسك قبل الميدتيرم</div>
+  </div>
+</div>
+`;
+
+const DM_QUIZ = [
+  {q:"Which of the following best describes data mining?",opts:["Storing large amounts of data in databases","Extracting interesting, non-trivial, previously unknown patterns from large data","Writing SQL queries to retrieve records","Manually reading data to find trends"],a:1,ex:"الـ Data Mining مش مجرد تخزين داتا (A) ولا استعلامات SQL عادية (C) ولا قراءة يدوية (D) — التعريف الأصلي هو استخراج أنماط non-trivial و implicit و previously unknown و potentially useful من داتا ضخمة، وده بالظبط اللي اختيار B بيقوله."},
+  {q:"In the KDD process, data mining is:",opts:["The whole knowledge discovery process","One step inside a larger process that includes pre-processing and post-processing","Only the cleaning of data","Only the visualization of results"],a:1,ex:"الـ Data Mining مجرد خطوة في النص — قبلها الـ pre-processing (تنظيف، تكامل، normalization) وبعدها الـ post-processing (تقييم الأنماط وتفسيرها وعرضها). هي جزء من pipeline أكبر اسمه KDD."},
+  {q:"Predicting whether a credit card transaction is 'legitimate' or 'fraudulent' is an example of:",opts:["Regression","Clustering","Classification","Association rule mining"],a:2,ex:"المطلوب التنبؤ بفئة (legitimate أو fraudulent) من فئات معروفة مسبقًا — وده تعريف الـ Classification. الـ Regression بتتنبأ بأرقام مش فئات، والـ Clustering بتكتشف مجموعات مجهولة، والـ Association بتدور على علاقات بين منتجات."},
+  {q:"Predicting the sales amount based on advertising expenditure is an example of:",opts:["Classification","Regression","Clustering","Outlier analysis"],a:1,ex:"المبيعات قيمة رقمية continuous مش فئة — وأي تنبؤ برقم continuous بناءً على متغيرات تانية اسمه Regression. الـ Classification هتكون لو كنا بنتنبأ بفئة زي 'ناجح/فاشل'."},
+  {q:"Clustering is considered ______ learning because class labels are unknown.",opts:["Supervised","Unsupervised","Reinforcement","Semi-supervised"],a:1,ex:"الـ Clustering شغال من غير labels خالص — الخوارزمية هي اللي بتقرر إزاي تقسم البيانات لمجموعات متشابهة، وده تعريف الـ unsupervised learning. الـ supervised (زي Classification) بيحتاج labels جاهزة في الـ training data."},
+  {q:"The principle of cluster analysis is:",opts:["Maximizing inter-class similarity and minimizing intra-class similarity","Maximizing intra-class similarity and minimizing inter-class similarity","Making all clusters identical","Assigning each object to a predefined label"],a:1,ex:"الفكرة إن العناصر جوه نفس الـ cluster تبقى متشابهة قد الإمكان (intra-class similarity تتعلى) والـ clusters المختلفة تبقى بعيدة عن بعض (inter-class similarity تقل). الاختيار A معكوس الفكرة تمامًا."},
+  {q:"In the rule {Diaper → Beer} [0.5%, 75%], the values represent:",opts:["Confidence and support","Support and confidence","Accuracy and precision","Mean and variance"],a:1,ex:"الترتيب: [support, confidence]. الـ support = 0.5% يعني 0.5% من المعاملات فيها الحفاضات والبيرة مع بعض، والـ confidence = 75% يعني من اللي اشترى حفاضات 75% اشترى بيرة كمان."},
+  {q:"If two items are strongly associated (frequently bought together), then:",opts:["One item must cause the other","They are correlated, but association does not imply causality","They are always substitutes","Their prices must be equal"],a:1,ex:"الارتباط لازم يتفرق عن السببية — حاجتين بتتشتروا مع بعض ممكن يكون السبب عامل ثالث. فـ correlation ممكن توجد من غير causality."},
+  {q:"Which of the following is NOT one of the motivating challenges of data mining?",opts:["Scalability","High dimensionality","Data ownership and distribution","Lack of data in modern systems"],a:3,ex:"المشكلة بالعكس تمامًا — عندنا فيضان من البيانات مش نقص. التحديات الحقيقية: Scalability، High dimensionality، Heterogeneous data، Data ownership. 'Lack of data' عكس الواقع وعكس سبب وجود الـ data mining أصلًا."},
+  {q:"In classification, the dataset is typically split into:",opts:["Training set (learns the model) and test set (evaluates the model)","Input set and output set","Support set and confidence set","Cluster set and outlier set"],a:0,ex:"الـ training set بيدخل في الخوارزمية عشان تتعلم الموديل، وبعدين الـ test set بيتحط على الموديل عشان نختبر أداؤه على بيانات مشافهاش قبل كده. لو قيّمنا على نفس بيانات التدريب هنحصل على نتيجة مبالغ فيها."}
+];
+
+const ML_LEC01_HTML = `
+<div class="lec-page" id="ml-lec01">
+  <div class="page-header">
+    <span class="page-lec-num">LECTURE 01</span>
+    <div class="page-title-wrap"><h2>The Machine Learning Landscape<span>مدخل إلى تعلّم الآلة</span></h2></div>
+  </div>
+
+  <div class="content-block">
+    <div class="block-title-bar"><span class="btitle-en">1 · Course Overview</span><span class="btitle-sep">|</span><span class="btitle-ar">نظرة عامة على المادة</span></div>
+    <div class="bilingual-grid">
+      <div class="col-en"><div class="col-label">ENGLISH</div>
+        <p><strong>Machine Learning and Pattern Recognition</strong> — the course aims to introduce the basic concepts and techniques of ML, and to teach ML by doing it: using ML algorithms to solve practical problems.</p>
+        <ul>
+          <li><strong>Main textbook:</strong> Hands-on Machine Learning with Scikit-Learn, Keras &amp; TensorFlow (2nd ed., Geron).</li>
+          <li><strong>Practical part:</strong> Python basics + implementing ML techniques.</li>
+          <li><strong>Grading:</strong> 20% Section Work + Practical Exam, 20% Midterm, 20% Assignments + Reports + Quizzes, 40% Final Exam.</li>
+        </ul>
+        <p>Key topics covered during the semester: fitting a model to data, optimizing a <strong>cost function</strong>, handling and cleaning data, <strong>feature engineering</strong>, model selection and hyperparameter tuning with <strong>cross-validation</strong>, and fighting overfitting/underfitting.</p>
+      </div>
+      <div class="col-ar"><div class="col-label">العربية</div>
+        <p>مادة <strong>Machine Learning and Pattern Recognition</strong> — هدفها إنها تديك المفاهيم والتكنيكات الأساسية للـ ML، والأهم إنك <strong>تتعلم بالممارسة</strong>: تستخدم الخوارزميات عشان تحل مسائل حقيقية.</p>
+        <ul>
+          <li><strong>الكتاب الرئيسي:</strong> Hands-on Machine Learning with Scikit-Learn, Keras &amp; TensorFlow (الإصدار التاني، Geron).</li>
+          <li><strong>الجزء العملي:</strong> أساسيات الـ Python + تنفيذ تكنيكات الـ ML.</li>
+          <li><strong>التوزيع:</strong> 20% سكاشن وامتحان عملي، 20% ميدتيرم، 20% واجبات وتقارير وكويزات، 40% نهائي.</li>
+        </ul>
+        <p>أهم المواد اللي هتدرسها: الـ fitting لموديل على الداتا، تحسين الـ <strong>cost function</strong>، تنظيف البيانات، الـ <strong>feature engineering</strong>، اختيار الموديل وتظبيط الـ hyperparameters بالـ <strong>cross-validation</strong>، والتعامل مع الـ overfitting والـ underfitting.</p>
+      </div>
+    </div>
+    <div class="highlight-row">
+      <div class="hl-en">This course is hands-on: you learn ML by implementing algorithms in Python, not just by reading theory.</div>
+      <div class="hl-ar">المادة دي عملية: هتتعلم ML عن طريق إنك تطبق الخوارزميات بـ Python، مش بس من القراية.</div>
+    </div>
+    <div class="example-box">
+      <span class="ex-label">EXAMPLE — مثال</span>
+      <div class="ex-en">A typical week: the lecture explains Decision Trees, and the practical section implements one from scratch in Python and tests it on a real dataset — theory and coding together.</div>
+      <div class="ex-ar">أسبوع نموذجي: المحاضرة بتشرح الـ Decision Trees، والسكشن بيطلب منك تطبقها بنفسك في الـ Python وتجربها على داتاسيت حقيقية — نظري وعملي مع بعض.</div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <div class="block-title-bar"><span class="btitle-en">2 · What Is Machine Learning?</span><span class="btitle-sep">|</span><span class="btitle-ar">إيه هو الـ Machine Learning؟</span></div>
+    <div class="bilingual-grid">
+      <div class="col-en"><div class="col-label">ENGLISH</div>
+        <p>Three famous definitions of ML:</p>
+        <ul>
+          <li><strong>Definition 1:</strong> The science and art of programming computers so they can <strong>learn from data</strong>.</li>
+          <li><strong>Definition 2 (Arthur Samuel, 1959):</strong> The field of study that gives computers the ability to learn <strong>without being explicitly programmed</strong>.</li>
+          <li><strong>Definition 3 (Tom Mitchell, 1997):</strong> A computer program learns from <strong>experience E</strong> with respect to some <strong>task T</strong> and some <strong>performance measure P</strong>, if its performance on T, as measured by P, <strong>improves with experience E</strong>.</li>
+        </ul>
+        <p><strong>Key terms (spam filter example):</strong> the examples used for learning form the <strong>training set</strong>, each example is a <strong>training instance (sample)</strong>, and the performance measure is <strong>accuracy</strong> (common in classification).</p>
+      </div>
+      <div class="col-ar"><div class="col-label">العربية</div>
+        <p>تعريفات مشهورة للـ ML:</p>
+        <ul>
+          <li><strong>التعريف الأول:</strong> علم وفن برمجة الكمبيوتر عشان يقدر <strong>يتعلم من البيانات</strong>.</li>
+          <li><strong>التعريف التاني (Arthur Samuel, 1959):</strong> المجال اللي بيدي الكمبيوتر القدرة إنه يتعلم <strong>من غير ما نبرمجه بشكل صريح</strong> على كل حاجة.</li>
+          <li><strong>التعريف التالت (Tom Mitchell, 1997):</strong> البرنامج بيتعلم من <strong>الـ experience E</strong> بالنسبة لـ <strong>task T</strong> معينة ومقيس أداء <strong>P</strong>، لو أداؤه في الـ T حسب مقياس الـ P <strong>بيتحسن مع الـ E</strong>.</li>
+        </ul>
+        <p><strong>مصطلحات مهمة (مثال الـ spam filter):</strong> الأمثلة اللي النظام بيتعلم منها اسمها <strong>training set</strong>، كل مثال فيها اسمه <strong>training instance (sample)</strong>، ومقياس الأداء هنا اسمه <strong>accuracy</strong> (شائع في الـ classification).</p>
+      </div>
+    </div>
+    <div class="highlight-row">
+      <div class="hl-en">A program "learns" when its performance on a task keeps improving with experience — not when it is just fed rules.</div>
+      <div class="hl-ar">البرنامج بيُقال عليه "يتعلم" لما أداؤه في مهمة معينة يستمر في التحسن مع الخبرة — مش لما بس بنكتبله قواعد جاهزة.</div>
+    </div>
+    <div class="example-box">
+      <span class="ex-label">EXAMPLE — مثال</span>
+      <div class="ex-en">Spam filter using Mitchell's definition: Task T = flag spam emails, Experience E = examples of spam and ham emails, Performance P = accuracy. The more flagged examples it sees, the better its accuracy gets — that is learning.</div>
+      <div class="ex-ar">فلتر السبام على تعريف Mitchell: الـ Task T = يصنف إيميلات السبام، الـ Experience E = أمثلة إيميلات سبام وطبيعية، الـ Performance P = الـ accuracy. كل ما يشوف إيميلات أكتر كل ما دقته تزيد — وده اسمه تعلم.</div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <div class="block-title-bar"><span class="btitle-en">3 · Why Use Machine Learning?</span><span class="btitle-sep">|</span><span class="btitle-ar">ليه نستخدم الـ Machine Learning؟</span></div>
+    <div class="bilingual-grid">
+      <div class="col-en"><div class="col-label">ENGLISH</div>
+        <p><strong>Traditional approach:</strong> a human studies the problem, manually writes rules, evaluates, and keeps fixing errors forever. If spammers adapt, you must write new rules endlessly.</p>
+        <p><strong>ML approach:</strong> instead of writing rules, you feed the system a <strong>training set</strong> — it automatically discovers which words/phrases are good spam predictors. The result is <strong>shorter, easier to maintain, and more accurate</strong>.</p>
+        <p><strong>ML shines for:</strong></p>
+        <ul>
+          <li>Problems needing a lot of <strong>fine-tuning or long rule lists</strong>.</li>
+          <li>Complex problems where traditional approaches give no good solution.</li>
+          <li><strong>Fluctuating environments</strong> — ML adapts to new data automatically.</li>
+          <li>Getting <strong>insights</strong> from huge data — this digging is called <strong>data mining</strong>.</li>
+        </ul>
+      </div>
+      <div class="col-ar"><div class="col-label">العربية</div>
+        <p><strong>الطريقة التقليدية:</strong> إنسان يدرس المشكلة، يكتب قواعد بإيده، يقيّم، ويفضل يصلح أخطاء للأبد. لو الـ spammers غيّروا أساليبهم، هتفضل تكتب قواعد جديدة بلا نهاية.</p>
+        <p><strong>طريقة الـ ML:</strong> بدل ما تكتب القواعد بنفسك، بتدي النظام <strong>training set</strong> — وهو أوتوماتيك بيكتشف أنهي كلمات وتعابير بتوضّح إن الإيميل سبام. النتيجة <strong>أقصر، أسهل في الصيانة، وأدق</strong>.</p>
+        <p><strong>الـ ML بيتفوق في:</strong></p>
+        <ul>
+          <li>المسائل اللي محتاجة <strong>تظبيط كتير أو قواعد كتير</strong>.</li>
+          <li>المسائل المعقدة اللي الطرق التقليدية مش لاقية ليها حل كويس.</li>
+          <li><strong>البيئات المتغيرة</strong> — الـ ML بيتأقلم مع الداتا الجديدة أوتوماتيك.</li>
+          <li>استخراج <strong>رؤى وinsights</strong> من الداتا الضخمة — والتنقيب ده اسمه <strong>data mining</strong>.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="highlight-row">
+      <div class="hl-en">Instead of writing rules for the machine, you give it data — and it figures out the rules by itself.</div>
+      <div class="hl-ar">بدل ما تكتب القواعد للماكينة، بتديها داتا — وهي اللي بتطلع القواعد لوحدها.</div>
+    </div>
+    <div class="example-box">
+      <span class="ex-label">EXAMPLE — مثال</span>
+      <div class="ex-en">A spam filter without ML needs a rule per trick: "if email contains 'FREE MONEY' → spam". Spammers write "FR£E M0NEY" and the rule breaks. An ML filter just learns from newly flagged emails and keeps catching them automatically.</div>
+      <div class="ex-ar">فلتر سبام من غير ML محتاج قاعدة لكل حيلة: "لو الإيميل فيه 'FREE MONEY' → سبام". الـ spammer يكتب "FR£E M0NEY" والقاعدة تبطل تشتغل. فلتر الـ ML بيتعلم من الإيميلات اللي بيتبلغ عنها ويفضل ماسكهم أوتوماتيك.</div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <div class="block-title-bar"><span class="btitle-en">4 · Examples of Applications</span><span class="btitle-sep">|</span><span class="btitle-ar">أمثلة على التطبيقات</span></div>
+    <div class="bilingual-grid">
+      <div class="col-en"><div class="col-label">ENGLISH</div>
+        <p>Every application maps to an ML task plus suitable algorithms:</p>
+        <ul>
+          <li>Classifying products on a production line → <strong>image classification</strong> (CNNs).</li>
+          <li>Detecting tumors in brain scans → <strong>semantic segmentation</strong> (CNNs).</li>
+          <li>Classifying news articles / flagging offensive comments → <strong>text classification</strong> (RNNs, CNNs, Transformers).</li>
+          <li>Summarizing documents, chatbots, voice commands → NLP/NLU, speech recognition (RNNs, CNNs, Transformers).</li>
+          <li>Forecasting company revenue → <strong>regression</strong> (Linear/Polynomial Regression, regression SVM, Random Forests, ANN).</li>
+          <li>Credit card fraud → <strong>anomaly detection</strong>.</li>
+          <li>Segmenting clients by purchases → <strong>clustering</strong>.</li>
+          <li>Visualizing high-dimensional data → <strong>dimensionality reduction</strong>.</li>
+          <li>Product recommendation → <strong>recommender system</strong> (ANN).</li>
+          <li>Intelligent game bots → <strong>Reinforcement Learning</strong> (e.g., AlphaGo).</li>
+        </ul>
+      </div>
+      <div class="col-ar"><div class="col-label">العربية</div>
+        <p>كل تطبيق بيندرج تحت مهمة ML معينة مع خوارزميات مناسبة:</p>
+        <ul>
+          <li>تصنيف منتجات على خط الإنتاج → <strong>image classification</strong> (CNNs).</li>
+          <li>اكتشاف أورام في أشعة المخ → <strong>semantic segmentation</strong> (CNNs).</li>
+          <li>تصنيف أخبار / كشف تعليقات مسيئة → <strong>text classification</strong> (RNNs، CNNs، Transformers).</li>
+          <li>تلخيص مستندات، chatbots، أوامر صوتية → NLP/NLU و speech recognition.</li>
+          <li>توقع إيرادات الشركة → <strong>regression</strong> (Linear/Polynomial Regression، regression SVM، Random Forests، ANN).</li>
+          <li>الاحتيال ببطاقات الائتمان → <strong>anomaly detection</strong>.</li>
+          <li>تقسيم العملاء حسب المشتريات → <strong>clustering</strong>.</li>
+          <li>عرض داتا عالية الأبعاد بشكل مفهوم → <strong>dimensionality reduction</strong>.</li>
+          <li>ترشيح منتجات → <strong>recommender system</strong> (ANN).</li>
+          <li>بوتات ألعاب ذكية → <strong>Reinforcement Learning</strong> (زي AlphaGo).</li>
+        </ul>
+      </div>
+    </div>
+    <div class="highlight-row">
+      <div class="hl-en">There is no single "ML algorithm" — every real-world problem is first translated into a task (classification, regression, clustering...), then matched with the right model.</div>
+      <div class="hl-ar">مفيش خوارزمية ML واحدة سحرية — أي مشكلة واقعية بنترجمها الأول لمهمة (classification، regression، clustering...) ونختار بعدين الموديل المناسب ليها.</div>
+    </div>
+    <div class="example-box">
+      <span class="ex-label">EXAMPLE — مثال</span>
+      <div class="ex-en">Your company asks for "an AI feature". A fraud-alert system maps to anomaly detection, a sales forecaster maps to regression, and grouping customers maps to clustering — three different problems needing three different models.</div>
+      <div class="ex-ar">شركتك طلبت "ميزة AI". نظام تنبيه الاحتيال ده Anomaly Detection، وتوقع المبيعات ده Regression، وتقسيم العملاء ده Clustering — تلات مشاكل مختلفة محتاجة تلات موديلات مختلفة.</div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <div class="block-title-bar"><span class="btitle-en">5 · Supervised vs Unsupervised Learning</span><span class="btitle-sep">|</span><span class="btitle-ar">الـ Supervised vs الـ Unsupervised</span></div>
+    <div class="bilingual-grid">
+      <div class="col-en"><div class="col-label">ENGLISH</div>
+        <p><strong>Supervised Learning:</strong> the training data includes the desired solutions, called <strong>labels</strong>. Two classic sub-tasks:</p>
+        <ul>
+          <li><strong>Classification:</strong> predict a <strong>class</strong> (spam vs ham). Key algorithms: k-Nearest Neighbors, Logistic Regression, SVM, Decision Trees, Random Forests, Neural Networks.</li>
+          <li><strong>Regression:</strong> predict a <strong>continuous value</strong> (e.g., life satisfaction from GDP). Key algorithm: Linear Regression.</li>
+        </ul>
+        <p><strong>Unsupervised Learning:</strong> the training data is <strong>unlabeled</strong> — the system learns without a teacher:</p>
+        <ul>
+          <li><strong>Clustering:</strong> K-Means, DBSCAN, HCA — group similar instances.</li>
+          <li><strong>Anomaly / novelty detection:</strong> One-class SVM, Isolation Forest — trained mostly on normal data, flags weird new instances.</li>
+          <li><strong>Visualization & dimensionality reduction:</strong> PCA, Kernel PCA, LLE, t-SNE — output a 2D/3D representation, merging correlated features into fewer ones.</li>
+          <li><strong>Association rule learning:</strong> Apriori, Eclat — discover relations between attributes.</li>
+        </ul>
+      </div>
+      <div class="col-ar"><div class="col-label">العربية</div>
+        <p><strong>Supervised Learning:</strong> الداتا اللي بتدرب بيها الخوارزمية فيها الحلول الجاهزة، واسمها <strong>labels</strong>. وليها فرعين كلاسيكيين:</p>
+        <ul>
+          <li><strong>Classification:</strong> بتتنبأ بـ <strong>فئة</strong> (سبام ولا عادي). أشهر الخوارزميات: k-Nearest Neighbors، Logistic Regression، SVM، Decision Trees، Random Forests، Neural Networks.</li>
+          <li><strong>Regression:</strong> بتتنبأ بـ <strong>رقم continuous</strong> (زي الرضا عن الحياة من الـ GDP). أشهر خوارزمية: Linear Regression.</li>
+        </ul>
+        <p><strong>Unsupervised Learning:</strong> الداتا <strong>من غير labels</strong> — النظام بيتعلم لوحده من غير معلم:</p>
+        <ul>
+          <li><strong>Clustering:</strong> K-Means، DBSCAN، HCA — بتجمع العناصر المتشابهة.</li>
+          <li><strong>Anomaly / novelty detection:</strong> One-class SVM، Isolation Forest — بتتدرب على داتا طبيعية في الغالب، وبتعلّم على أي حاجة غريبة جديدة.</li>
+          <li><strong>Visualization و dimensionality reduction:</strong> PCA، Kernel PCA، LLE، t-SNE — بتطلع تمثيل 2D/3D بتدمج الـ features المترابطة في أقل عدد.</li>
+          <li><strong>Association rule learning:</strong> Apriori، Eclat — بتكتشف علاقات بين الـ attributes.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="highlight-row">
+      <div class="hl-en">Supervised = learning with an answer key; unsupervised = exploring data that has no answer key at all.</div>
+      <div class="hl-ar">الـ Supervised = تعلم ومعاك ورقة الإجابات؛ الـ Unsupervised = استكشاف داتا مفيهاش ورقة إجابات أصلًا.</div>
+    </div>
+    <div class="example-box">
+      <span class="ex-label">EXAMPLE — مثال</span>
+      <div class="ex-en">Emails labeled "spam"/"ham" → supervised classification. Feeding the same system a million unlabeled emails and asking it to discover groups of similar emails → unsupervised clustering. t-SNE can then plot those groups in 2D with similar emails next to each other.</div>
+      <div class="ex-ar">إيميلات عليها labels "spam"/"ham" → supervised classification. تدي النظام مليون إيميل من غير labels ويطلب منه يكتشف مجموعات الإيميلات المتشابهة → unsupervised clustering. وبعدين t-SNE ممكن ترسم المجموعات دي في 2D والمتشابه جنب بعض.</div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <div class="block-title-bar"><span class="btitle-en">6 · Semi-Supervised & Reinforcement Learning</span><span class="btitle-sep">|</span><span class="btitle-ar">الـ Semi-Supervised و الـ Reinforcement Learning</span></div>
+    <div class="bilingual-grid">
+      <div class="col-en"><div class="col-label">ENGLISH</div>
+        <p><strong>Semi-Supervised Learning:</strong> you have <strong>plenty of unlabeled</strong> instances and only <strong>few labeled</strong> ones. Most algorithms here are combinations of unsupervised + supervised methods. Real example: <strong>Google Photos</strong> — it groups faces (unsupervised) and you only label a few, then it labels the rest.</p>
+        <p><strong>Reinforcement Learning (RL):</strong> an <strong>agent</strong> observes the <strong>environment</strong>, selects and performs <strong>actions</strong>, and receives <strong>rewards or penalties</strong>. Over time it learns the best strategy — called a <strong>policy</strong> — that maximizes reward. The loop: observe → act → reward → update policy → repeat.</p>
+        <ul>
+          <li>Many robots use RL to learn how to walk.</li>
+          <li><strong>AlphaGo</strong> simply applied the policy it had learned.</li>
+        </ul>
+      </div>
+      <div class="col-ar"><div class="col-label">العربية</div>
+        <p><strong>Semi-Supervised Learning:</strong> عندك <strong>كمية كبيرة من الداتا من غير labels</strong> وكمية صغيرة بس اللي متعلّم. أغلب الخوارزميات هنا عبارة عن دمج بين unsupervised و supervised. مثال حقيقي: <strong>Google Photos</strong> — بتجمع الوشوش المتشابهة (unsupervised) وأنت بتسمي شوية بس، وهي تسمي الباقي.</p>
+        <p><strong>Reinforcement Learning (RL):</strong> في <strong>agent</strong> بيراقب الـ <strong>environment</strong>، ينفذ <strong>actions</strong>، وياخد <strong>rewards أو penalties</strong>. مع الوقت بيتعلم أفضل استراتيجية — اسمها <strong>policy</strong> — اللي بتكبّر المكافأة. الدورة: راقب → اعمل حاجة → خد مكافأة → حدّث الـ policy → كرر.</p>
+        <ul>
+          <li>روبوتات كتير بتستخدم RL عشان تتعلم المشي.</li>
+          <li><strong>AlphaGo</strong> كان مجرد بيطبّق الـ policy اللي اتعلمها.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="highlight-row">
+      <div class="hl-en">RL learns by trial and error: actions that earn rewards get repeated, actions that earn penalties get avoided.</div>
+      <div class="hl-ar">الـ RL بيتعلم بالتجربة والغلط: الأفعال اللي بتجيب مكافأة بتتكرر، واللي بتجيب عقاب بتتجنب.</div>
+    </div>
+    <div class="example-box">
+      <span class="ex-label">EXAMPLE — مثال</span>
+      <div class="ex-en">A robot learning to walk: stepping forward without falling = small reward, falling = -50 points penalty. After thousands of attempts, its policy says: lean slightly, move one leg, keep balance — it "learned" to walk without anyone programming the steps.</div>
+      <div class="ex-ar">روبوت بيتعلم المشي: خطوة قدام من غير ما يقع = مكافأة صغيرة، والوقوع = عقاب 50 نقطة. بعد آلاف المحاولات، الـ policy بتاعه بتقول: اميل شوية، حرك رجل، حافظ على توازن — "تعلم" المشي من غير ما حد يبرمجله الخطوات.</div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <div class="block-title-bar"><span class="btitle-en">7 · Batch vs Online Learning</span><span class="btitle-sep">|</span><span class="btitle-ar">الـ Batch مقابل الـ Online Learning</span></div>
+    <div class="bilingual-grid">
+      <div class="col-en"><div class="col-label">ENGLISH</div>
+        <p><strong>Batch Learning:</strong> the system cannot learn incrementally — it must be trained on <strong>all available data at once</strong>. This is slow and resource-heavy, so it's done offline. To learn about new data, you must <strong>retrain from scratch</strong> on the full dataset.</p>
+        <p><strong>Online Learning:</strong> train <strong>incrementally</strong> by feeding data instances sequentially, individually or in <strong>mini-batches</strong>. Each step is fast and cheap, so the system learns <strong>on the fly</strong>. Great for rapidly changing data (stock prices) and limited computing resources.</p>
+        <ul>
+          <li><strong>Out-of-core learning:</strong> when data is too big for memory, load a chunk, train on it, repeat until all data is used — online learning applied to huge datasets.</li>
+          <li><strong>Learning rate:</strong> how fast the system adapts to new data. High rate = adapts fast but <strong>forgets old data</strong> quickly.</li>
+          <li>Risk: if <strong>bad data</strong> is fed in, performance gradually declines — monitor closely and be ready to switch learning off.</li>
+        </ul>
+      </div>
+      <div class="col-ar"><div class="col-label">العربية</div>
+        <p><strong>Batch Learning:</strong> النظام مش بيعرف يتعلم على مراحل — لازم يتدرب على <strong>كل البيانات مرة واحدة</strong>. ده بطيء وثقيل في الموارد، فبيترنى offline. لو عايزه يتعلم من داتا جديدة، لازم <strong>تعيد التدريب من الأول</strong> على الداتاسيت كاملة.</p>
+        <p><strong>Online Learning:</strong> التدريب بيحصل <strong>بالتدريج</strong> — بتديله الـ instances واحدة ورا التانية أو في مجموعات صغيرة اسمها <strong>mini-batches</strong>. كل خطوة سريعة ورخيصة، فالنظام بيتعلم <strong>on the fly</strong>. ممتاز للداتا السريعة التغير (زي أسعار الأسهم) ولما الموارد محدودة.</p>
+        <ul>
+          <li><strong>Out-of-core learning:</strong> لما الداتا أكبر من الذاكرة، بنحمّل جزء، نتدرب عليه، ونكرر لحد ما نخلص كل الداتا — دي طريقة Online Learning على داتاسيتس ضخمة.</li>
+          <li><strong>Learning rate:</strong> مدى سرعة تأقلم النظام مع الداتا الجديدة. لو عالية هيأقلم بسرعة بس <strong>هينسى الداتا القديمة</strong> بسرعة.</li>
+          <li>الخطر: لو دخلتله <strong>داتا وحشة</strong>، أداؤه هيقل بالتدريج — لازم تراقبه كويس وتكون جاهز توقف التعلم.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="highlight-row">
+      <div class="hl-en">Batch learns once from everything and must be rebuilt to learn more; online keeps learning little by little as new data arrives.</div>
+      <div class="hl-ar">الـ Batch بيتعلم مرة واحدة من كل حاجة ولو عايز يتعلم أكتر لازم نعيد بناؤه؛ الـ Online بيفضل يتعلم شوية شوية كل ما توصل داتا جديدة.</div>
+    </div>
+    <div class="example-box">
+      <span class="ex-label">EXAMPLE — مثال</span>
+      <div class="ex-en">A stock-price prediction system can't wait for a full retrain every night — it uses online learning to update itself continuously as prices tick. A tax-calculator model trained once a year on the full records is fine as batch learning.</div>
+      <div class="ex-ar">نظام توقع أسعار الأسهم مش مستني يتدرب من الأول كل ليلة — بيستخدم online learning ويحدّث نفسه باستمرار مع كل تحديث في الأسعار. لكن موديل بيتحسب مرة في السنة على السجلات الكاملة يكفيه batch learning.</div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <div class="block-title-bar"><span class="btitle-en">8 · Instance-Based vs Model-Based Learning</span><span class="btitle-sep">|</span><span class="btitle-ar">الـ Instance-Based مقابل الـ Model-Based</span></div>
+    <div class="bilingual-grid">
+      <div class="col-en"><div class="col-label">ENGLISH</div>
+        <p><strong>Instance-based learning:</strong> the system <strong>learns the examples by heart</strong>, then generalizes to new cases using a <strong>similarity measure</strong> to compare them with the learned examples (e.g., k-NN: the new point takes the class of its nearest neighbors).</p>
+        <p><strong>Model-based learning:</strong> build a <strong>model</strong> from the examples, then use that model to make predictions. Example — the life satisfaction model:</p>
+        <ul>
+          <li>Model: life satisfaction = θ₀ + θ₁ × GDP per capita (a linear model).</li>
+          <li>Define a <strong>cost function</strong> (how bad the model is) or a <strong>utility/fitness function</strong> (how good it is).</li>
+          <li>Training = running an algorithm that finds the <strong>parameter values that minimize the cost function</strong> (result: θ₀ = 4.85, θ₁ = 4.91×10⁻⁵).</li>
+          <li>Applying the model to new cases is called <strong>inference</strong>.</li>
+        </ul>
+      </div>
+      <div class="col-ar"><div class="col-label">العربية</div>
+        <p><strong>Instance-based learning:</strong> النظام <strong>بحفظ الأمثلة عن ظهر قلب</strong>، ولما ييجي حالة جديدة بيستخدم <strong>similarity measure</strong> تقارنها بالأمثلة المحفوظة (زي k-NN: النقطة الجديدة بتاخد فئة أقرب جيران لها).</p>
+        <p><strong>Model-based learning:</strong> بنبني <strong>موديل</strong> من الأمثلة ونستخدمه في التنبؤ. مثال — موديل الرضا عن الحياة:</p>
+        <ul>
+          <li>الموديل: life satisfaction = θ₀ + θ₁ × GDP per capita (موديل خطي).</li>
+          <li>بنعرف <strong>cost function</strong> (قد إيه الموديل وحش) أو <strong>utility/fitness function</strong> (قد إيه هو كويس).</li>
+          <li>التدريب = تشغيل خوارزمية تلاقي <strong>قيم الـ parameters اللي بتصغّر الـ cost function</strong> (النتيجة: θ₀ = 4.85، θ₁ = 4.91×10⁻⁵).</li>
+          <li>استخدام الموديل على حالات جديدة اسمه <strong>inference</strong>.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="highlight-row">
+      <div class="hl-en">Instance-based remembers; model-based compresses the data into an equation you can use and inspect.</div>
+      <div class="hl-ar">الـ Instance-based بيحفظ الأمثلة؛ الـ Model-based بيضغط الداتا في معادلة تقدر تستخدمها وتفهمها.</div>
+    </div>
+    <div class="example-box">
+      <span class="ex-label">EXAMPLE — مثال</span>
+      <div class="ex-en">Predicting happiness from GDP: model-based learning fits the line life satisfaction = 4.85 + 4.91×10⁻⁵ × GDP. For a country with GDP 22,587 per capita, the model predicts ≈ 5.96 — close to the real value. Inference is just plugging a number into the learned equation.</div>
+      <div class="ex-ar">التنبؤ بالسعادة من الـ GDP: الـ model-based learning بيلائم الخط life satisfaction = 4.85 + 4.91×10⁻⁵ × GDP. لبلد دخله 22,587 بنلاقي التوقع ≈ 5.96 — قريب من الحقيقي. الـ inference ببساطة بتحط رقم في المعادلة اللي اتعلمت.</div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <div class="block-title-bar"><span class="btitle-en">9 · Main Challenges: Bad Data</span><span class="btitle-sep">|</span><span class="btitle-ar">التحديات الأساسية: الداتا الوحشة</span></div>
+    <div class="bilingual-grid">
+      <div class="col-en"><div class="col-label">ENGLISH</div>
+        <p>Most ML failures come from the data. Four classic data problems:</p>
+        <ul>
+          <li><strong>Insufficient quantity of training data:</strong> most algorithms need a lot of data to work properly.</li>
+          <li><strong>Nonrepresentative training data:</strong> a too-small sample gives <strong>sampling noise</strong>; even a large sample can be flawed if the sampling method is biased — this is <strong>sampling bias</strong>. (Example: the GDP model mispredicts Brazil, Mexico, Chile because the training sample missed certain countries.)</li>
+          <li><strong>Poor-quality data:</strong> errors, outliers, and noise hide the underlying patterns and hurt performance.</li>
+          <li><strong>Irrelevant features:</strong> the system learns well only when the data has enough relevant features and few irrelevant ones.</li>
+        </ul>
+        <p><strong>Feature engineering</strong> fixes the features problem:</p>
+        <ul>
+          <li><strong>Feature selection</strong> — keep the most useful existing features.</li>
+          <li><strong>Feature extraction</strong> — combine existing features into a more useful one (dimensionality reduction helps).</li>
+          <li><strong>Creating new features</strong> — by gathering new data.</li>
+        </ul>
+      </div>
+      <div class="col-ar"><div class="col-label">العربية</div>
+        <p>أغلب فشل الـ ML بيجي من الداتا. أربع مشاكل كلاسيكية:</p>
+        <ul>
+          <li><strong>كمية التدريب مش كفاية:</strong> أغلب الخوارزميات محتاجة داتا كتير عشان تشتغل صح.</li>
+          <li><strong>الداتا مش ممثلة للواقع:</strong> عينة صغيرة بتديك <strong>sampling noise</strong>؛ وحتى عينة كبيرة ممكن تكون معوجّة لو طريقة الـ sampling فيها تحيز — وده اسمه <strong>sampling bias</strong>. (مثال: موديل الـ GDP غلّط في البرازيل والمكسيك وتشيلي لأن عينة التدريب كانت ناقصة.)</li>
+          <li><strong>جودة الداتا وحشة:</strong> أخطاء و outliers و noise بيخفوا الأنماط الحقيقية وبوّظوا الأداء.</li>
+          <li><strong>Features مش مفيدة:</strong> النظام بيتعلم كويس بس لما الداتا فيها features كفاية ومفيدة ومش مليانة حشو.</li>
+        </ul>
+        <p>وعلاج مشكلة الـ features هو الـ <strong>feature engineering</strong>:</p>
+        <ul>
+          <li><strong>Feature selection</strong> — نمسك أهم الـ features الموجودة.</li>
+          <li><strong>Feature extraction</strong> — ندمج features موجودة في واحدة أقوى (والـ dimensionality reduction بيساعد هنا).</li>
+          <li><strong>Creating new features</strong> — نجمع داتا جديدة.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="highlight-row">
+      <div class="hl-en">A model is only as good as its data — not enough data, biased data, or noisy data will beat any algorithm.</div>
+      <div class="hl-ar">جودة الموديل بتتبع جودة داتاه — داتا قليلة أو متحيزة أو مليانة noise هتبوّظ أي خوارزمية مهما كانت قوية.</div>
+    </div>
+    <div class="example-box">
+      <span class="ex-label">EXAMPLE — مثال</span>
+      <div class="ex-en">The life-satisfaction model trained only on Hungary, Korea, France, Australia, and the US predicted low satisfaction for Brazil and Mexico — but reality was higher. Cause: the training sample was tiny and nonrepresentative (sampling noise), not a bad algorithm.</div>
+      <div class="ex-ar">موديل الرضا عن الحياة اللي اتدرب على المجر وكوريا وفرنسا وأستراليا وأمريكا بس، توقع رضا قليل للبرازيل والمكسيك — والحقيقة كانت أعلى. السبب: العينة كانت صغيرة ومش ممثلة (sampling noise)، مش خوارزمية وحشة.</div>
+    </div>
+  </div>
+
+  <div class="content-block">
+    <div class="block-title-bar"><span class="btitle-en">10 · Main Challenges: Bad Algorithms</span><span class="btitle-sep">|</span><span class="btitle-ar">التحديات الأساسية: الخوارزمية الوحشة</span></div>
+    <div class="bilingual-grid">
+      <div class="col-en"><div class="col-label">ENGLISH</div>
+        <p><strong>Overfitting:</strong> the model performs well on the training data but <strong>does not generalize</strong> well to new data — it memorized the noise instead of the pattern.</p>
+        <p>Solutions for overfitting:</p>
+        <ul>
+          <li><strong>Simplify the model</strong> — fewer parameters, fewer attributes, or constrain it.</li>
+          <li><strong>Gather more training data</strong>.</li>
+          <li><strong>Reduce noise</strong> in the training data (fix errors, remove outliers).</li>
+        </ul>
+        <p><strong>Regularization</strong> = constraining the model to make it simpler and reduce overfitting risk. It's controlled by a <strong>hyperparameter</strong>. A linear model with θ₀ and θ₁ has two degrees of freedom — regularization restricts those.</p>
+        <p><strong>Underfitting:</strong> the model is <strong>too simple</strong> to learn the underlying structure of the data. Solutions:</p>
+        <ul>
+          <li>Select a <strong>more powerful model</strong> with more parameters.</li>
+          <li>Feed <strong>better features</strong> (feature engineering).</li>
+          <li><strong>Reduce constraints</strong> — lower the regularization hyperparameter.</li>
+        </ul>
+      </div>
+      <div class="col-ar"><div class="col-label">العربية</div>
+        <p><strong>Overfitting:</strong> الموديل ممتاز على الـ training data بس <strong>مش بيعمّم كويس</strong> على داتا جديدة — حفظ الـ noise بدل النمط الحقيقي.</p>
+        <p>حلول الـ overfitting:</p>
+        <ul>
+          <li><strong>بسّط الموديل</strong> — parameters أقل، attributes أقل، أو قيّده.</li>
+          <li><strong>جمع داتا تدريب أكتر</strong>.</li>
+          <li><strong>قلّل الـ noise</strong> في الداتا (صلّح الأخطاء وشيل الـ outliers).</li>
+        </ul>
+        <p><strong>Regularization</strong> = تقييد الموديل عشان نخليه أبسط ونقلل خطر الـ overfitting. بتتحكم فيها بـ <strong>hyperparameter</strong>. الموديل الخطي اللي فيه θ₀ و θ₁ عنده درجتي حرية — الـ regularization بتقيّدهم.</p>
+        <p><strong>Underfitting:</strong> الموديل <strong>بسيط أكتر من اللازم</strong> ومش قادر يتعلم البنية الحقيقية للداتا. الحلول:</p>
+        <ul>
+          <li>اختار <strong>موديل أقوى</strong> بـ parameters أكتر.</li>
+          <li>ديّه <strong>features أحسن</strong> (feature engineering).</li>
+          <li><strong>خفف القيود</strong> — قلّل الـ regularization hyperparameter.</li>
+        </ul>
+      </div>
+    </div>
+    <div class="highlight-row">
+      <div class="hl-en">Overfitting = the model memorized instead of learned; underfitting = the model is too weak to learn at all — the goal is the sweet spot between them.</div>
+      <div class="hl-ar">الـ overfitting = الموديل حفظ بدل ما يفهم؛ الـ underfitting = الموديل ضعيف أكتر من إنه يتعلم أصلًا — والهدف النقطة المثالية بينهم.</div>
+    </div>
+    <div class="example-box">
+      <span class="ex-label">EXAMPLE — مثال</span>
+      <div class="ex-en">On the GDP data: a straight line = simple, may underfit (misses the curve). A wiggly curve passing through every point = overfits (great on training data, fails on new countries). Regularization keeps the line closer to the truth by limiting how wild the curve can get.</div>
+      <div class="ex-ar">على داتا الـ GDP: خط مستقيم = بسيط وممكن underfit (مش ماسك التعرّج). ومنحنى متلوي معدي من كل النقط = overfit (ممتاز على التدريب وفاشل على بلاد جديدة). الـ regularization بتحافظ على خط أقرب للحقيقة بتحدّد شدة التلوي المسموح.</div>
+    </div>
+  </div>
+
+  <div class="summary-block">
+    <h3>ملخص المحاضرة 01 — مدخل إلى الـ Machine Learning</h3>
+    <div class="summary-content">
+      <p>📌 <strong>Machine Learning</strong> = برمجة الكمبيوتر عشان <strong>يتعلم من الداتا</strong> من غير ما نكتبله كل القواعد صراحة. تعريف Mitchell: أداء في الـ <strong>Task T</strong> بيتحسن مع الـ <strong>Experience E</strong> حسب مقياس <strong>P</strong>.</p>
+      <p>🔁 <strong>ليه ML؟</strong> لأنه بيستبدل كتابة القواعد اليدوية بالتعلم من الـ <strong>training set</strong> — أسهل صيانة، أدق، وبيتأقلم مع التغيير أوتوماتيك. التنقيب في الداتا عشان نطلع insights اسمه <strong>data mining</strong>.</p>
+      <p>🏷️ <strong>Supervised Learning</strong>: الداتا فيها labels — <strong>Classification</strong> (فئة) و <strong>Regression</strong> (رقم continuous).</p>
+      <p>🔍 <strong>Unsupervised Learning</strong>: من غير labels — <strong>Clustering</strong> (K-Means, DBSCAN)، <strong>Anomaly detection</strong>، <strong>Dimensionality reduction</strong> (PCA, t-SNE)، و <strong>Association rules</strong> (Apriori).</p>
+      <p>🎯 <strong>Semi-supervised</strong>: labels قليلة + داتا كتير من غير labels (زي Google Photos). و <strong>Reinforcement Learning</strong>: agent بيتعلم الـ <strong>policy</strong> بالمكافآت والعقاب (زي AlphaGo).</p>
+      <p>⚡ <strong>Batch Learning</strong> بيتدرب مرة واحدة على كل الداتا ومحتاج retrain من الأول؛ <strong>Online Learning</strong> بيتعلم بالتدريج على الـ mini-batches — والـ <strong>learning rate</strong> بتحدد سرعة التأقلم مقابل نسيان القديم.</p>
+      <p>🧠 <strong>Instance-based</strong> بيحفظ الأمثلة ويقارن بالـ similarity (k-NN)؛ <strong>Model-based</strong> بيبني موديل — التدريب = تقليل الـ <strong>cost function</strong>، والتطبيق على جديد اسمه <strong>inference</strong>.</p>
+      <p>🚫 <strong>Bad Data</strong>: داتا قليلة، nonrepresentative (sampling noise / sampling bias)، جودة وحشة، أو irrelevant features — والحل <strong>feature engineering</strong> (selection / extraction / creating new).</p>
+      <p>⚖️ <strong>Bad Algorithms</strong>: الـ <strong>overfitting</strong> (حفظ الـ noise — عالجه بتبسيط الموديل أو داتا أكتر أو <strong>regularization</strong>) مقابل الـ <strong>underfitting</strong> (موديل بسيط زيادة — عالجه بموديل أقوى أو features أحسن).</p>
+    </div>
+  </div>
+
+  <div class="quiz-section">
+    <div class="quiz-title">Quiz — The Machine Learning Landscape</div>
+    <div class="quiz-subtitle">10 أسئلة — اختبر نفسك قبل الميدتيرم</div>
+  </div>
+</div>
+`;
+
+const ML_QUIZ = [
+  {q:"According to Tom Mitchell's definition (1997), a computer program learns if:",opts:["It is programmed with explicit rules for every situation","Its performance on task T, measured by P, improves with experience E","It runs faster than other programs","It stores large amounts of data in memory"],a:1,ex:"تعريف Mitchell بيقول حرفيًا: البرنامج \"يتعلم\" من experience E بالنسبة لـ task T ومقياس أداء P لو أداؤه في T (حسب P) بيتحسن مع الـ E. الاختيار ده بيعبّر عن التحسن بالخبرة اللي هو جوهر التعلم، مش مجرد برمجة صريحة أو سرعة أو تخزين."},
+  {q:"In a spam filter, the set of emails used to teach the system is called:",opts:["Test set","Training set — and each email in it is a training instance (sample)","Validation policy","Cost function"],a:1,ex:"الأمثلة اللي النظام بيتعلم منها اسمها training set وكل مثال فيها اسمه training instance أو sample. الـ test set بييجي بعد التعلم للتقييم، والـ cost function مقياس لجودة الموديل مش داتا."},
+  {q:"A system trained on mostly normal transactions that flags unusual new ones (e.g., credit card fraud) is an example of:",opts:["Supervised classification","Unsupervised anomaly detection","Reinforcement learning","Regression"],a:1,ex:"اكتشاف الاحتيال ده anomaly detection ضمن الـ unsupervised learning: النظام بيتدرب على حالات طبيعية في الغالب ويتعلم يميّز \"الغريب\" منها من غير labels للاحتيال."},
+  {q:"Google Photos grouping faces where you label only a few people is an example of:",opts:["Batch learning","Semi-supervised learning","Pure supervised learning","Instance-based regression"],a:1,ex:"عندك كمية كبيرة من الصور من غير labels وأنت بتسمي قليل منها بس — وده تعريف الـ semi-supervised learning اللي بيدمج supervised مع unsupervised."},
+  {q:"In Reinforcement Learning, the best strategy an agent learns to maximize reward over time is called:",opts:["A cost function","A policy","A label","A mini-batch"],a:1,ex:"الـ policy هي الاستراتيجية اللي بيحدد فيها الـ agent أنهي action يختار في كل موقف، وهو بيتعلمها بنفسه عشان يكبّر المكافأة مع الوقت. AlphaGo كان مجرد بيطبّق policy اتعلمها."},
+  {q:"The key difference between batch and online learning is:",opts:["Batch uses labels, online does not","Batch must train on all data at once and retrain from scratch for new data; online learns incrementally on the fly","Online learning only works for classification","Batch learning requires Python"],a:1,ex:"الـ batch مش بيعرف يتعلم incrementally — لازم كل الداتا مرة واحدة offline، ولو الداتا اتجددت يبقى retrain من الأول. الـ online بيستقبل instances أو mini-batches بالتدريج ويتحدث على طول."},
+  {q:"A high learning rate in an online learning system means:",opts:["The system adapts quickly to new data but tends to forget old data fast","The system never forgets anything","The system trains slower but more accurately","The system becomes batch learning"],a:0,ex:"الـ learning rate بتحدد سرعة التأقلم مع الداتا الجديدة. لو عالية النظام هيأقلم بسرعة بس هيميل إنه ينسى القديم بسرعة."},
+  {q:"k-Nearest Neighbors is an example of:",opts:["Model-based learning","Instance-based learning","Reinforcement learning","Batch-only regression"],a:1,ex:"الـ instance-based learning معناها إن النظام بيحفظ الأمثلة وبعدين بيستخدم similarity measure يقارن بيها الحالات الجديدة — وده بالظبط شغل k-NN."},
+  {q:"Overfitting means:",opts:["The model is too simple to capture the data structure","The model performs well on training data but fails to generalize to new data","The model has too little training data by definition","The cost function is minimized perfectly"],a:1,ex:"الـ overfitting = الموديل ذاكر الـ training data (بما فيها الـ noise) بدل ما يتعلم النمط العام، فبيظهر ممتاز على التدريب وكارثي على الجديد."},
+  {q:"If your model underfits the training data, which of these is a valid solution?",opts:["Increase regularization to constrain it more","Select a more powerful model with more parameters, feed better features, or reduce regularization","Remove more training data","Add more noise to the training data"],a:1,ex:"الـ underfitting معناه إن الموديل أبسط من اللازم. الحل: موديل بـ parameters أكتر، features أحسن، أو نقلل القيود يعني نصغّر الـ regularization hyperparameter."}
+];
+
+const SUBJECTS = [
+  {
+    id:'cn', code:'NET · CSC214', icon:'🌐', name:'Computer Networks',
+    arName:'شبكات الحاسوب والاتصالات', acc:'#00e5a0', acc2:'#00f0ff', acc3:'#4d8aff',
+    live:true, desc:'Data communication fundamentals, topologies, devices, LAN/MAN/WAN and firewalls.',
+    stats:[['1','Lectures'],['15','Questions'],['6','Topics']], chapters:['Lecture 01 — Communication Networks'],
+    quiz:CN_QUIZ, content:{0:{raw:LEC01_HTML}}
+  },
+  {
+    id:'dmin', code:'DM · CSC', icon:'⛏️', name:'Data Mining',
+    arName:'التنقيب في البيانات', acc:'#b347d9', acc2:'#ff4d9e', acc3:'#4d8aff',
+    live:true, desc:'Pattern discovery, clustering, classification and association rules.',
+    stats:[['1','Lectures'],['10','Questions'],['8','Topics']], chapters:['Lecture 01 — Intro to Data Mining'],
+    quiz:DM_QUIZ, content:{0:{raw:DM_LEC01_HTML}}
+  },
+  {
+    id:'ml', code:'ML · CSC', icon:'🧠', name:'Machine Learning',
+    arName:'تعلّم الآلة', acc:'#4d8aff', acc2:'#00f0ff', acc3:'#b347d9',
+    live:true, desc:'Supervised and unsupervised learning, model training and evaluation.',
+    stats:[['1','Lectures'],['10','Questions'],['10','Topics']], chapters:['Lecture 01 — ML Landscape'],
+    quiz:ML_QUIZ, content:{0:{raw:ML_LEC01_HTML}}
+  },
+  {
+    id:'dl', code:'DL · CSC', icon:'🔌', name:'Digital Logic',
+    arName:'المنطق الرقمي', acc:'#38bdf8', acc2:'#ffd93d', acc3:'#a78bfa',
+    live:false, desc:'Boolean algebra, logic gates, combinational and sequential circuits.',
+    stats:[['—','Lectures'],['—','Quizzes'],['—','Topics']], chapters:[]
+  }
+];
+
+/* ================================================================
+   RENDER — HOME
+================================================================ */
+const grid = document.getElementById('subject-grid');
+SUBJECTS.forEach(s=>{
+  const c = document.createElement('div');
+  c.className = 'card' + (s.live?'':' disabled');
+  c.style.cssText = `--card-acc:${s.acc};--card-acc2:${s.acc2};border-top:2px solid ${s.acc}55;`;
+  c.addEventListener('mouseenter',()=>{ if(s.live){ c.style.borderColor=s.acc+'66'; c.style.boxShadow=`0 22px 60px -18px ${s.acc}44`; }});
+  c.addEventListener('mouseleave',()=>{ c.style.borderColor=''; c.style.boxShadow=''; });
+  if(s.live) c.addEventListener('click',()=>openSubject(s.id));
+  c.innerHTML = `
+    <div class="card-top">
+      <span class="dot-tag"><span class="dot" style="background:${s.acc};color:${s.acc}"></span>${s.code}</span>
+      <span class="status ${s.live?'live':'soon'}">${s.live?'● LIVE':'COMING SOON'}</span>
+    </div>
+    <div class="card-body">
+      <div class="icon-box" style="background:linear-gradient(135deg,${s.acc}33,${s.acc2}22);border:1px solid ${s.acc}44">${s.icon}</div>
+      <div>
+        <h3>${s.name}</h3>
+        <span class="ar-name">${s.arName}</span>
+        <p class="desc">${s.desc}</p>
+      </div>
+    </div>
+    <div class="stats">
+      ${s.stats.map(st=>`<div class="stat"><b style="color:${s.acc}">${st[0]}</b><span>${st[1]}</span></div>`).join('')}
+    </div>
+    <button class="cta" ${s.live?'':'disabled'} style="${s.live?`--cta-grad:linear-gradient(120deg,${s.acc},${s.acc2})`:''}" onclick="openSubject('${s.id}')">${s.live?'ENTER SUBJECT →':'LOCKED'}</button>`;
+  grid.appendChild(c);
+});
+
+/* ================================================================
+   RENDER — SUBJECT VIEW
+================================================================ */
+let currentSubject = null;
+
+function openSubject(id){
+  const s = SUBJECTS.find(x=>x.id===id);
+  currentSubject = s;
+  document.documentElement.style.setProperty('--acc', s.acc);
+  document.documentElement.style.setProperty('--acc2', s.acc2);
+  document.documentElement.style.setProperty('--acc3', s.acc3);
+  document.getElementById('tb-title').textContent = s.icon + '  ' + s.name;
+  document.getElementById('tb-crumb').textContent = 'LEVEL 02 / SEM 01 / ' + s.code;
+
+  const sb = document.getElementById('sidebar');
+  const ct = document.getElementById('content');
+  sb.innerHTML = '<div class="sb-label">// CHAPTERS</div>';
+  ct.innerHTML = '';
+
+  s.chapters.forEach((ch,i)=>{
+    const isQuiz = (s.quizAt===i);
+    const item = document.createElement('div');
+    item.className='ch-item'+(i===0?' active':'');
+    item.style.setProperty('--ch', [s.acc,s.acc2,s.acc3][i%3]);
+    item.innerHTML = `<span class="ch-num">${isQuiz?'⚡':String(i+1).padStart(2,'0')}</span>${isQuiz?ch:ch}`;
+    item.onclick = ()=>{
+      sb.querySelectorAll('.ch-item').forEach(e=>e.classList.remove('active'));
+      item.classList.add('active');
+      showChapter(s, i, ct);
+      if(window.innerWidth<=960) sb.scrollLeft = item.offsetLeft - 40;
+    };
+    sb.appendChild(item);
+
+    const chEl = document.createElement('section');
+    chEl.className='chapter'+(i===0?' active':'');
+    ct.appendChild(chEl);
+  });
+
+  document.getElementById('nav').style.display = 'none';
+  document.getElementById('view-home').classList.remove('active');
+  document.getElementById('view-subject').classList.add('active');
+  if(!s.chapters.length) ct.innerHTML = '<div class="empty-mod"><div class="em-icon">'+s.icon+'</div><h4>'+s.name+'</h4><p>'+s.arName+' — no content yet.</p></div>';
+  window.scrollTo(0,0);
+  showChapter(s, 0, ct);
+}
+
+function showChapter(s, i, ct){
+  ct.querySelectorAll('.chapter').forEach((e,j)=>e.classList.toggle('active', j===i));
+  const el = ct.querySelectorAll('.chapter')[i];
+  if(!el) return;
+  const c = s.content && s.content[i];
+  if(c && c.raw){ el.innerHTML = c.raw; if(s.quiz && s.quiz.length && i===0) mountQuiz(el); return; }
+  if(c){
+    el.innerHTML = `<div class="ch-kicker">${c.kicker}</div><h2>${c.title}</h2><p class="ch-desc">${c.desc}</p>${c.html}`;
+    return;
+  }
+  el.innerHTML = `
+    <div class="ch-kicker">${s.code} · MODULE ${String(i+1).padStart(2,'0')}</div>
+    <h2>${s.chapters[i]}</h2>
+    <p class="ch-desc">${s.name} — ${s.arName}</p>
+    <div class="empty-mod"><div class="em-icon">${s.icon}</div><h4>${s.chapters[i]}</h4><p>No content yet.</p></div>`;
+}
+
+function goHome(){
+  document.getElementById('nav').style.display = '';
+  document.getElementById('view-subject').classList.remove('active');
+  document.getElementById('view-home').classList.add('active');
+  window.scrollTo(0,0);
+}
+
+/* ================================================================
+   QUIZ ENGINE
+================================================================ */
+function mountQuiz(scope){
+  const quiz = currentSubject.quiz, N = quiz.length;
+  let box = scope.querySelector('.quiz-section');
+  if(!box){ box = document.createElement('div'); box.className='quiz-section'; scope.appendChild(box); }
+  const old = box.querySelector('.quiz-body'); if(old) old.remove();
+  const body = document.createElement('div');
+  body.className = 'quiz-body';
+  body.style.marginTop = '24px';
+  body.innerHTML = `
+    <div class="quiz-top">
+      <span class="q-count">0 / ${N} ANSWERED</span>
+      <span class="q-score">SCORE 0 / ${N}</span>
+    </div>
+    <div class="q-progress"><i></i></div>
+    ${quiz.map((q,qi)=>`
+    <div class="q-card" data-qi="${qi}">
+      <div class="q-num">Q-${String(qi+1).padStart(2,'0')} · MCQ</div>
+      <div class="q-text">${q.q}</div>
+      <div class="q-opts">
+        ${q.opts.map((o,i)=>`<button class="opt" data-i="${i}"><span class="letter">${'ABCD'[i]}</span>${o}</button>`).join('')}
+      </div>
+      <div class="q-explain">${q.ex}</div>
+    </div>`).join('')}
+    <div class="quiz-result">
+      <div class="big"></div>
+      <p></p>
+      <button class="cta" style="max-width:280px">↻ RETAKE QUIZ</button>
+    </div>`;
+  box.appendChild(body);
+
+  let answered = 0, score = 0;
+  const cEl = body.querySelector('.q-count'), sEl = body.querySelector('.q-score'), bar = body.querySelector('.q-progress i');
+
+  body.querySelectorAll('.q-card').forEach(card=>{
+    const q = quiz[+card.dataset.qi];
+    const btns = card.querySelectorAll('.opt');
+    btns.forEach(btn=>btn.onclick = ()=>{
+      const picked = +btn.dataset.i, right = picked === q.a;
+      btns.forEach(b=>b.disabled = true);
+      btns[q.a].classList.add('correct');
+      if(!right) btn.classList.add('wrong'); else score++;
+      card.classList.add(right ? 'flash-correct' : 'flash-wrong');
+      card.querySelector('.q-explain').classList.add('show');
+      answered++;
+      cEl.textContent = answered + ' / ' + N + ' ANSWERED';
+      sEl.textContent = 'SCORE ' + score + ' / ' + N;
+      bar.style.width = (answered / N * 100) + '%';
+      if(answered === N){
+        const r = body.querySelector('.quiz-result');
+        r.classList.add('show');
+        r.querySelector('.big').textContent = score + ' / ' + N;
+        const pct = score / N;
+        r.querySelector('p').textContent =
+          pct===1 ? 'ممتاز! درجة كاملة — أنت جاهز تمامًا لهذا الجزء من المحاضرة 🏆' :
+          pct>=.7 ? 'أداء رائع! راجع الأسئلة التي أخطأت فيها فقط وأعد المحاولة 💪' :
+          pct>=.4 ? 'جيد، لكن تحتاج مراجعة — أعد قراءة ملخص المحاضرة ثم أعد المحاولة 📖' :
+          'لا بأس — ابدأ بمراجعة أقسام المحاضرة ثم عد للاختبار، ستتحسن بالتكرار 🔄';
+        setTimeout(()=>r.scrollIntoView({behavior:'smooth',block:'center'}), 400);
+      }
+    });
+  });
+
+  body.querySelector('.quiz-result .cta').onclick = ()=>{
+    mountQuiz(scope);
+    box.scrollIntoView({behavior:'smooth',block:'start'});
+  };
+}
+
+/* ================================================================
+   NAV SCROLL + PARTICLES
+================================================================ */
+window.addEventListener('scroll', ()=>{
+  document.getElementById('nav').classList.toggle('scrolled', window.scrollY > 40);
+});
+
+const cv = document.getElementById('particles'), ctx = cv.getContext('2d');
+let pts = [];
+function sizeCanvas(){ cv.width = innerWidth; cv.height = innerHeight; }
+sizeCanvas(); addEventListener('resize', sizeCanvas);
+for(let i=0;i<70;i++) pts.push({x:Math.random()*innerWidth, y:Math.random()*innerHeight, r:Math.random()*1.6+.4, vx:(Math.random()-.5)*.3, vy:(Math.random()-.5)*.3, o:Math.random()*.5+.15, c:Math.random()<.5?'0,240,255':(Math.random()<.5?'77,138,255':'179,71,217')});
+(function loop(){
+  ctx.clearRect(0,0,cv.width,cv.height);
+  pts.forEach(p=>{
+    p.x+=p.vx; p.y+=p.vy;
+    if(p.x<0)p.x=cv.width; if(p.x>cv.width)p.x=0;
+    if(p.y<0)p.y=cv.height; if(p.y>cv.height)p.y=0;
+    ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,7);
+    ctx.fillStyle=`rgba(${p.c},${p.o})`; ctx.fill();
+  });
+  requestAnimationFrame(loop);
+})();
+</script>
+</body>
+</html>
